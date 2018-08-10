@@ -61,3 +61,24 @@ export const checkAuth = (token, expiresIn) => {
     }
   };
 };
+
+const registerSuccess = (user, expiresIn) => {
+  return {
+    type: actionTypes.AUTH_REGISTER,
+    expiresIn,
+    registerData: user
+  }
+}
+
+export const register = (objRegister) => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.post('auth/register', objRegister);
+      console.log(data.register)
+      dispatch(registerSuccess(data.register, data.expires_in * 1000));
+      return Promise.resolve();
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+}

@@ -1,0 +1,1 @@
+export const FETCH_PROMOTION = 'FETCH_PROMOTION';

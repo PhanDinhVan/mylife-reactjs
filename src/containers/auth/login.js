@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 
 import * as actions from './auth-actions';
 
 class Login extends Component {
   state = {
-    email: 'ltdai91@gmail.com',
-    password: 'gCJ40TQx'
+    // serve
+    // email: 'ltdai91@gmail.com',
+    // password: 'gCJ40TQx',
+    
+    // localhost
+    email: 'vanpd.it@gmail.com',
+    password: 'Ae5FBzFQ',
+    register: false
   }
   loginHandler = async () => {
     try {
@@ -22,9 +29,20 @@ class Login extends Component {
     updateState[event.target.name] = event.target.value;
     this.setState(updateState);
   }
+  registerOnClick = () => {
+    this.setState({
+      register: true
+    })
+  }
+
   render() {
+    let redirectPath = null;
+    if(this.state.register) {
+      redirectPath = <Redirect to="/register" />;
+    }
     return (
       <div className="app flex-row align-items-center">
+        {redirectPath}
         <Container>
           <Row className="justify-content-center">
             <Col md="8">
@@ -77,7 +95,7 @@ class Login extends Component {
                       <h2>Sign up</h2>
                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                         labore et dolore magna aliqua.</p>
-                      <Button color="primary" className="mt-3" active>Register Now!</Button>
+                      <Button onClick={this.registerOnClick} color="primary" className="mt-3" active>Register Now!</Button>
                     </div>
                   </CardBody>
                 </Card>

@@ -22,12 +22,24 @@ const Users = Loadable({
   loading: Loading,
 });
 
+const Bookings = Loadable({
+  loader: () => import('./containers/booking/booking'),
+  loading: Loading,
+});
+
+const Promotions = Loadable({
+  loader: () => import('./containers/promotion/promotions'),
+  loading: Loading,
+});
+
 
 const routes = [
   // { path: '/', exact: true, name: 'Users', component: Users },
   { path: '/restaurants', exact: true, name: 'Restaurants', component: Restaurants },
   { path: '/users', exact: true, name: 'Users', component: Users },
-  { path: '/companies', exact: true, name: 'Companies', component: Companies }
+  { path: '/companies', exact: true, name: 'Companies', component: Companies },
+  { path: '/bookings', exact: true, name: 'Bookings', component: Bookings },
+  { path: '/promotions', exact: true, name: 'Promotions', component: Promotions }
 ];
 
 export default routes;

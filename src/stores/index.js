@@ -14,7 +14,7 @@ const persistConfig = {
   transforms: [encryptor],
   key: 'root',
   storage,
-  whitelist: ['authState', 'restaurantState', 'userState', 'companyState']
+  whitelist: ['authState', 'restaurantState', 'userState', 'companyState', 'bookingState', 'promotionState']
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

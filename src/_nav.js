@@ -12,6 +12,14 @@ export default {
       name: 'Companies',
       url: '/companies',
       icon: 'icon-map',
+    }, {
+      name: 'Bookings',
+      url: '/bookings',
+      icon: 'icon-map',
+    }, {
+      name: 'Promotions',
+      url: '/promotions',
+      icon: 'icon-map',
     }
   ]
 };
