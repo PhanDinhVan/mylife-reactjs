@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, Button } from 'reactstrap'
+import { Table } from 'reactstrap'
 
 import * as actions from './company-actions';
 
@@ -33,9 +33,17 @@ class Companies extends Component {
                       <td>{company.name}</td>
                       <td>{company.type}</td>
                       <td>{company.description}</td>
-                      <td align="center">
+                      {/* <td align="center">
                         <Button color="dark" size="xs">Edit</Button>
                         <Button className="ml-1" color="danger" size="xs">Delete</Button>
+                      </td> */}
+                      <td align="center" className="edit_delete">
+                        <span>
+                          <i className="fa fa-edit fa-lg mt-4 icon_edit_del"></i>
+                        </span>
+                        <span>
+                          <i className="fa fa-trash-o fa-lg mt-4 icon_edit_del"></i>
+                        </span>
                       </td>
                     </tr>
                   )

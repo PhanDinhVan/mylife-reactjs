@@ -5,6 +5,8 @@ import { companyReducers } from '../containers/companies';
 import { restaurantReducers } from '../containers/restaurants';
 import { bookingReducers } from '../containers/booking';
 import { promotionReducers } from '../containers/promotion';
+import { menuSuShiReducers } from '../containers/menus_sushi_yen';
+import { newReducers } from '../containers/news';
 
 const reducers = combineReducers({
   restaurantState: restaurantReducers,
@@ -12,7 +14,9 @@ const reducers = combineReducers({
   userState: userReducers,
   companyState: companyReducers,
   bookingState: bookingReducers,
-  promotionState: promotionReducers
+  promotionState: promotionReducers,
+  menusushiState: menuSuShiReducers,
+  newState: newReducers
 });
 
 export default reducers;

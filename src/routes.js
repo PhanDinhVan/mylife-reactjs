@@ -32,6 +32,16 @@ const Promotions = Loadable({
   loading: Loading,
 });
 
+const MenuSushiYen = Loadable({
+  loader: () => import('./containers/menus_sushi_yen/menus_sushi'),
+  loading: Loading,
+})
+
+const News = Loadable({
+  loader: () => import('./containers/news/news'),
+  loading: Loading,
+})
+
 
 const routes = [
   // { path: '/', exact: true, name: 'Users', component: Users },
@@ -39,7 +49,9 @@ const routes = [
   { path: '/users', exact: true, name: 'Users', component: Users },
   { path: '/companies', exact: true, name: 'Companies', component: Companies },
   { path: '/bookings', exact: true, name: 'Bookings', component: Bookings },
-  { path: '/promotions', exact: true, name: 'Promotions', component: Promotions }
+  { path: '/promotions', exact: true, name: 'Promotions', component: Promotions },
+  { path: '/menus_sushi_yen', exact: true, name: 'MenuSushiYen', component: MenuSushiYen },
+  { path: '/news', exact: true, name: 'News', component: News },
 ];
 
 export default routes;

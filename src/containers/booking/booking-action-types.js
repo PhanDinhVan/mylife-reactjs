@@ -1,1 +1,2 @@
 export const FETCH_BOOKING = 'FETCH_BOOKING';
+export const UPDATE_STATUS = 'UPDATE_STATUS';

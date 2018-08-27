@@ -116,6 +116,7 @@ class Users extends Component {
       })
       this.props.onFetchUser();
     } catch (err) {
+      this.setState({loading: false})
       let obj = JSON.parse(err.request.response);
       let email = obj.error.email[0];
       if ( email === "The email has already been taken." ) {
@@ -128,7 +129,7 @@ class Users extends Component {
   render() {
     let Modal = null;
     if (this.state.user != null) {
-      Modal = <ModalEdit show_Modal={this.state.showModal} 
+      Modal = <ModalEdit showModals={this.state.showModal} 
                 close_Modal={this.closeModal} 
                 obj_Modal={this.state.user}
                 on_Change={this.handleChange.bind()}
@@ -149,7 +150,7 @@ class Users extends Component {
             <i className="icon-people"></i> User List
           </div>
           <div className="card-body">
-          <Button onClick={this.showModalAddUser} color="success" 
+          <Button onClick={this.showModalAddUser} color="primary" 
               style={{marginBottom: '20px'}} >Add user</Button>
           <Table responsive striped bordered hover>
             <thead>
@@ -173,11 +174,19 @@ class Users extends Component {
                       <td className="text-capitalize">{user.role.name}</td>
                       <td>{user.profile ? user.profile.birthday : ''}</td>
                       <td align="center">
-                        <Badge className="text-capitalize" color="success">{user.status}</Badge>
+                        <Badge className="text-capitalize" color={user.status === "active" ? "success" : user.status === "inactive" ? "warning" : "secondary"}>{user.status}</Badge>
                       </td>
-                      <td align="center">
+                      {/* <td align="center">
                         <Button onClick={(e) => this.showModalEditUser(user)} color="dark" size="xs">Edit</Button>
                         <Button onClick={(e) => this.showModalDeleted(user)} className="ml-1" color="danger" size="xs">Delete</Button>
+                      </td> */}
+                      <td align="center" className="edit_delete">
+                        <span>
+                          <i className="fa fa-edit fa-lg mt-4 icon_edit_del" onClick={(e) => this.showModalEditUser(user)} ></i>
+                        </span>
+                        <span>
+                          <i className="fa fa-trash-o fa-lg mt-4 icon_edit_del" onClick={(e) => this.showModalDeleted(user)} ></i>
+                        </span>
                       </td>
                     </tr>
                   )

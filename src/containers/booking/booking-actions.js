@@ -19,3 +19,23 @@ export const fetchBooking = () => {
         }
     }
 }
+
+const updateStatusSuccess = (statusUpdate) => {
+  return {
+    type: actionTypes.UPDATE_STATUS,
+    statusUpdate: statusUpdate
+  }
+}
+
+export const updateStatus = (statusUpdate) => {
+  let id = statusUpdate.id;
+  return async dispatch => {
+    try {
+      const { data } = await axios.patch('booking/'+id, statusUpdate);
+      dispatch(updateStatusSuccess(data));
+      return Promise.resolve();
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+}

@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Button, Card, CardHeader, CardBody, CardGroup, Col, Container, Input, 
+    InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 
 import * as actions from './auth-actions';
+import background from '../../assets/img/brand/bg-home-1.jpg';
+// import BackgroundSlideshow from 'react-background-slideshow';
+
+// import image1 from '../../assets/img/brand/bg-home-1.jpg';
+// import image2 from '../../assets/img/brand/bg-home-3.jpg';
 
 class Login extends Component {
   state = {
     // serve
-    // email: 'ltdai91@gmail.com',
+    // email: 'philippe.nguyen@amagumolabs.com',
     // password: 'gCJ40TQx',
     
     // localhost
@@ -41,15 +47,18 @@ class Login extends Component {
       redirectPath = <Redirect to="/register" />;
     }
     return (
-      <div className="app flex-row align-items-center">
+      <div className="app flex-row align-items-center" style={{backgroundImage:"url(" + background + ")"}}>
         {redirectPath}
         <Container>
+          {/* <BackgroundSlideshow images={[ image1, image2, image3 ]} /> */}
           <Row className="justify-content-center">
-            <Col md="8">
+            <Col className="form-login" lg="4">
               <CardGroup>
                 <Card className="p-4">
-                  <CardBody>
+                  <CardHeader className="hearder-login">
                     <h1>Login</h1>
+                  </CardHeader>
+                  <CardBody>
                     <p className="text-muted">Sign In to your account</p>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
@@ -89,7 +98,7 @@ class Login extends Component {
                     </Row>
                   </CardBody>
                 </Card>
-                <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: 44 + '%' }}>
+                {/* <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: 44 + '%' }}>
                   <CardBody className="text-center">
                     <div>
                       <h2>Sign up</h2>
@@ -98,7 +107,7 @@ class Login extends Component {
                       <Button onClick={this.registerOnClick} color="primary" className="mt-3" active>Register Now!</Button>
                     </div>
                   </CardBody>
-                </Card>
+                </Card> */}
               </CardGroup>
             </Col>
           </Row>

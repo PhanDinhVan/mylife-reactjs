@@ -1,0 +1,1 @@
+export const FETCH_MENUSUSHI = 'FETCH_MENUSUSHI';

@@ -24,7 +24,7 @@ const ModalUser = (props) => {
       click_submit = props.on_Submit_Add;
     }
     return (
-      <Modal isOpen={props.show_Modal} className={'modal-primary '}>
+      <Modal isOpen={props.showModals} className={'modal-primary '}>
         <ModalHeader>{title}</ModalHeader>
         <ModalBody>
           <Form action="" method="post" className="form-horizontal">

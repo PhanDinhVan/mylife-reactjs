@@ -1,1 +1,2 @@
 export const FETCH_PROMOTION = 'FETCH_PROMOTION';
+export const ADD_PROMOTION = 'ADD_PROMOTION';
