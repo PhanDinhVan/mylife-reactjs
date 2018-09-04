@@ -12,7 +12,6 @@ export const fetchRestaurant = () => {
   return async dispatch => {
     try {
       const { data } = await axios.get('shop');
-      // console.log(data.shops)
       dispatch(fetchRestaurantSuccess(data.shops));
       return Promise.resolve();
     } catch (err) {

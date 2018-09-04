@@ -22,8 +22,8 @@ const ModalNews = (props) => {
       title = 'Edit News';
       btn_submit = 'Save';
       click_submit = props.onSubmitEdit;
-      srcImg = 'http://localhost/project/laravel/mylife-api/'+props.objNewsEdit.photo;
-      // srcImg = 'http://mylifecompanyapp.amagumolabs.io/api/'+props.objNewsEdit.photo;
+      // srcImg = 'http://localhost/project/laravel/mylife-api/'+props.objNewsEdit.photo;
+      srcImg = 'http://mylifecompanyapp.amagumolabs.io/api/'+props.objNewsEdit.photo;
       url = props.objNewsEdit.url;
       // str.replace(/\s+/g, '-');
     } else {

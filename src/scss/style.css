@@ -9951,6 +9951,13 @@ body {
 .ql-editor {
   min-height: 100px; }
 
+.md6-right {
+  text-align: right;
+  padding-right: 10px; }
+
+.cancel {
+  margin-right: 15px; }
+
 html body .app.flex-row.align-items-center {
   height: 100vh; }
 
@@ -9967,3 +9974,21 @@ html body .app.flex-row.align-items-center {
 
 .form-check-inline .form-check-input {
   display: none; }
+
+.col-status {
+  padding-left: 0px;
+  padding-right: 0px; }
+
+.time_status {
+  width: 25%; }
+
+.col-readonly {
+  padding-left: 0px; }
+
+.suggest {
+  text-align: center;
+  padding-top: 15px;
+  padding-left: 12%; }
+
+.color-booking {
+  color: #23282c; }

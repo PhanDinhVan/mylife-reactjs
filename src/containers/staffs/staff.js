@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Badge, Table, Button } from 'reactstrap';
 
-import * as actions from './user-actions';
+import * as actions from './staff-actions';
 import ModalEdit from './modal-edit';
 import ModalDelete from './modal-delete';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-class Users extends Component {
+class Staffs extends Component {
   constructor(props) {
     super(props);
 
@@ -152,34 +152,15 @@ class Users extends Component {
     })
   }
   render() {
-    let Modal = null;
-    if (this.state.user != null) {
-      Modal = <ModalEdit showModals={this.state.showModal} 
-                close_Modal={this.closeModal} 
-                obj_Modal={this.state.user}
-                on_Change={this.handleChange.bind()}
-                on_Submit={this.updateUserHandler}
-                on_Submit_Add={this.addUserHandler}
-                load={this.state.loading}
-                showInputPass={this.state.showInputPass}
-                deleteUser={this.deleteUserHandler}
-                showTextDelete={this.showTextPasswordDelete} />;
-    }
-    let Modal_Delete = null;
-    if (this.state.showModalDelete) {
-      Modal_Delete = <ModalDelete show_ModalDelete={this.state.showModalDelete}
-                        close_ModalDelete={this.closeModalDeleted}
-                        deleteUser={this.deleteUserHandler} />;
-    }
     return (
       <div className="animated fadeIn">
         <div className="card">
           <div className="card-header">
-            <i className="icon-people"></i> User List
+            <i className="icon-people"></i> Staff List
           </div>
           <div className="card-body">
           <Button onClick={this.showModalAddUser} color="primary" 
-              style={{marginBottom: '20px'}} >Add user</Button>
+              style={{marginBottom: '20px'}} >Add staff</Button>
           <Table responsive striped bordered hover>
             <thead>
               <tr>
@@ -193,7 +174,7 @@ class Users extends Component {
               </tr>
               </thead>
               <tbody>
-                {this.props.users.map(user => {
+                {this.props.staffs.map(user => {
                   return (
                     <tr key={user.id}>
                       <td>{user.profile ? user.profile.name : '' }</td>
@@ -219,7 +200,6 @@ class Users extends Component {
           </Table>
           </div>
         </div>
-        {Modal} {Modal_Delete}
       </div>
     );
   }
@@ -228,17 +208,17 @@ class Users extends Component {
 
 const mapStateToProps = state => {
   return {
-    users: state.userState.users
+    staffs: state.userState.staffs
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchUser: () => dispatch(actions.fetchUser()),
-    onDeleteUser: (idUserDelete) => dispatch(actions.deleteUser(idUserDelete)),
-    onUpdateUser: (userUpdate) => dispatch(actions.updateUser(userUpdate)),
-    onAddUser: (userAdd) => dispatch(actions.addUser(userAdd))
+    onFetchStaff: () => dispatch(actions.fetchStaff()),
+    // onDeleteUser: (idUserDelete) => dispatch(actions.deleteUser(idUserDelete)),
+    // onUpdateUser: (userUpdate) => dispatch(actions.updateUser(userUpdate)),
+    // onAddUser: (userAdd) => dispatch(actions.addUser(userAdd))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default connect(mapStateToProps, mapDispatchToProps)(Staffs);

@@ -14,12 +14,12 @@ import background from '../../assets/img/brand/bg-home-1.jpg';
 class Login extends Component {
   state = {
     // serve
-    // email: 'philippe.nguyen@amagumolabs.com',
-    // password: 'gCJ40TQx',
+    email: 'philippe.nguyen@amagumolabs.com',
+    password: 'gCJ40TQx',
     
     // localhost
-    email: 'vanpd.it@gmail.com',
-    password: 'Ae5FBzFQ',
+    // email: 'vanpd.it@gmail.com',
+    // password: 'Ae5FBzFQ',
     register: false
   }
   loginHandler = async () => {

@@ -20,6 +20,11 @@ export default {
           url: '/reviews',
           icon: 'icon-note',
         },
+        {
+          name: 'Roles',
+          url: '/roles',
+          icon: 'fa fa-id-badge',
+        },
       ],
     }, {
       name: 'MARKETING',

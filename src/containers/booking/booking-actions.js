@@ -39,3 +39,41 @@ export const updateStatus = (statusUpdate) => {
     }
   }
 }
+
+const addBookingSuccess = (bookingAdd) => {
+  return {
+    type: actionTypes.ADD_BOOKING,
+    bookingAdd: bookingAdd
+  }
+}
+
+export const addBooking = (bookingAdd) => {
+  console.log(bookingAdd)
+  return async dispatch => {
+    try {
+      const { data } = await axios.post('booking', bookingAdd);
+      dispatch(addBookingSuccess(data));
+      return Promise.resolve();
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+}
+
+const deleteBookingSuccess = () => {
+  return {
+    type: actionTypes.DELETE_BOOKING
+  }
+}
+
+export const deleteBooking = (idBookingDelete) => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.delete('booking/delete/'+idBookingDelete);
+      dispatch(deleteBookingSuccess(data));
+      return Promise.resolve();
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+}

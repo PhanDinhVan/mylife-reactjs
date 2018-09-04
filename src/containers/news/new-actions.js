@@ -13,7 +13,6 @@ export const fetchNew = () => {
     try {
       const { data } = await axios.get('news');
       dispatch(fetchNewSuccess(data.data));
-      console.log(data.data)
       return Promise.resolve();
     } catch (err) {
       return Promise.reject(err);

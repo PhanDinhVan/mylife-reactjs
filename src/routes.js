@@ -42,6 +42,11 @@ const News = Loadable({
   loading: Loading,
 })
 
+const Roles = Loadable({
+  loader: () => import('./containers/roles/roles'),
+  loading: Loading,
+})
+
 
 const routes = [
   // { path: '/', exact: true, name: 'Users', component: Users },
@@ -52,6 +57,7 @@ const routes = [
   { path: '/promotions', exact: true, name: 'Promotions', component: Promotions },
   { path: '/menus_sushi_yen', exact: true, name: 'MenuSushiYen', component: MenuSushiYen },
   { path: '/news', exact: true, name: 'News', component: News },
+  { path: '/roles', exact: true, name: 'Roles', component: Roles },
 ];
 
 export default routes;

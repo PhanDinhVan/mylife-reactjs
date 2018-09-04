@@ -12,7 +12,6 @@ export const fetchMenuSushiYen = () => {
   return async dispatch => {
     try {
       const { data } = await axios.get('get-menu');
-      console.log(data.menus)
       dispatch(fetchMenuSushiYenSuccess(data.menus));
       return Promise.resolve();
     } catch (err) {

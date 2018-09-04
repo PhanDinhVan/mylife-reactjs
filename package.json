@@ -50,7 +50,8 @@
     "redux-thunk": "^2.3.0",
     "simple-line-icons": "^2.4.1",
     "toastr": "^2.1.4",
-    "validator": "^10.5.0"
+    "validator": "^10.5.0",
+    "yarn-install": "^1.0.0"
   },
   "devDependencies": {
     "babel-jest": "^23.0.1",
