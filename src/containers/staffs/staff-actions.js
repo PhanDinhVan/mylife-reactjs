@@ -1,18 +1,18 @@
-import * as actionTypes from './user-action-types';
+import * as actionTypes from './staff-action-types';
 import axios from '../../config/axios';
 
-const fetchUserSuccess = (users) => {
+const fetchStaffSuccess = (staffs) => {
   return {
-    type: actionTypes.FETCH_USER,
-    users: users
+    type: actionTypes.FETCH_STAFF,
+    staffs: staffs
   };
 };
 
-export const fetchUser = () => {
+export const fetchStaff = () => {
   return async dispatch => {
     try {
-      const { data } = await axios.get('admin/users');
-      dispatch(fetchUserSuccess(data.users));
+      const { data } = await axios.get('admin/staff');
+      dispatch(fetchStaffSuccess(data.staffs));
       return Promise.resolve();
     } catch (err) {
       return Promise.reject(err);
@@ -20,17 +20,18 @@ export const fetchUser = () => {
   };
 };
 
-const deleteUserSuccess = () => {
+
+const deleteStaffSuccess = () => {
   return {
-    type: actionTypes.DELETE_USER
+    type: actionTypes.DELETE_STAFF
   }
 }
 
-export const deleteUser = (idUserDelete) => {
+export const deleteStaff = (idStaffDelete) => {
   return async dispatch => {
     try {
-      const { data } = await axios.delete('admin/delete/'+idUserDelete);
-      dispatch(deleteUserSuccess(data));
+      const { data } = await axios.delete('admin/staff/delete/'+idStaffDelete);
+      dispatch(deleteStaffSuccess(data));
       return Promise.resolve();
     } catch (err) {
       return Promise.reject(err);
@@ -38,18 +39,18 @@ export const deleteUser = (idUserDelete) => {
   }
 }
 
-const updateUserSuccess = (userUpdate) => {
+const updateStaffSuccess = (staffUpdate) => {
   return {
-    type: actionTypes.UPDATE_USER,
-    userUpdate: userUpdate
+    type: actionTypes.UPDATE_STAFF,
+    staffUpdate: staffUpdate
   }
 }
 
-export const updateUser = (userUpdate) => {
+export const updateStaff = (staffUpdate) => {
   return async dispatch => {
     try {
-      const { data } = await axios.post('admin/update', userUpdate)
-      dispatch(updateUserSuccess(data));
+      const { data } = await axios.post('/admin/staff/update', staffUpdate)
+      dispatch(updateStaffSuccess(data));
       return Promise.resolve();
     } catch (err) {
       return Promise.reject(err);
@@ -57,18 +58,19 @@ export const updateUser = (userUpdate) => {
   }
 }
 
-const addUserSuccess = (userAdd) => {
+const addStaffSuccess = (staffAdd) => {
   return {
-    type: actionTypes.ADD_USER,
-    userAdd: userAdd
+    type: actionTypes.ADD_STAFF,
+    staffAdd: staffAdd
   }
 }
 
-export const addUser = (userAdd) => {
+export const addStaff = (staffAdd) => {
+  console.log(staffAdd)
   return async dispatch => {
     try {
-      const { data } = await axios.post('admin/create', userAdd)
-      dispatch(addUserSuccess(data));
+      const { data } = await axios.post('admin/staff/create', staffAdd)
+      dispatch(addStaffSuccess(data));
       return Promise.resolve();
     } catch (err) {
       return Promise.reject(err);

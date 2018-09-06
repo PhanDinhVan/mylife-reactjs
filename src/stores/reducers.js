@@ -8,6 +8,8 @@ import { promotionReducers } from '../containers/promotion';
 import { menuSuShiReducers } from '../containers/menus_sushi_yen';
 import { newReducers } from '../containers/news';
 import { roleReducers }from '../containers/roles';
+import { staffReducers } from '../containers/staffs';
+import { bookingManagerReducers } from '../containers/booking_manager';
 
 const reducers = combineReducers({
   restaurantState: restaurantReducers,
@@ -19,6 +21,8 @@ const reducers = combineReducers({
   menusushiState: menuSuShiReducers,
   newState: newReducers,
   roleState: roleReducers,
+  staffState: staffReducers,
+  bookingMangerState: bookingManagerReducers,
 });
 
 export default reducers;

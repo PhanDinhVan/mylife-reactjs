@@ -5,7 +5,8 @@ import { Button, Card, CardHeader, CardBody, CardGroup, Col, Container, Input,
 import { Redirect } from 'react-router-dom';
 
 import * as actions from './auth-actions';
-import background from '../../assets/img/brand/bg-home-1.jpg';
+import background from '../../assets/img/brand/bg-login.jpg';
+import logo from '../../assets/img/brand/logo-mylifecoffee.png';
 // import BackgroundSlideshow from 'react-background-slideshow';
 
 // import image1 from '../../assets/img/brand/bg-home-1.jpg';
@@ -14,12 +15,12 @@ import background from '../../assets/img/brand/bg-home-1.jpg';
 class Login extends Component {
   state = {
     // serve
-    email: 'philippe.nguyen@amagumolabs.com',
-    password: 'gCJ40TQx',
+    // email: 'philippe.nguyen@amagumolabs.com',
+    // password: 'gCJ40TQx',
     
     // localhost
-    // email: 'vanpd.it@gmail.com',
-    // password: 'Ae5FBzFQ',
+    email: 'vanpd.it@gmail.com',
+    password: 'Ae5FBzFQ',
     register: false
   }
   loginHandler = async () => {
@@ -47,8 +48,12 @@ class Login extends Component {
       redirectPath = <Redirect to="/register" />;
     }
     return (
-      <div className="app flex-row align-items-center" style={{backgroundImage:"url(" + background + ")"}}>
+      <div className="app flex-row align-items-center backgound-login" style={{backgroundImage:"url(" + background + ")"}}>
         {redirectPath}
+        <div id="contentImg">
+          <img src={logo} />
+        </div>
+        
         <Container>
           {/* <BackgroundSlideshow images={[ image1, image2, image3 ]} /> */}
           <Row className="justify-content-center">

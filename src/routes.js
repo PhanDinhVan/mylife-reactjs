@@ -47,6 +47,16 @@ const Roles = Loadable({
   loading: Loading,
 })
 
+const Staffs = Loadable({
+  loader: () => import('./containers/staffs/staffs'),
+  loading: Loading,
+})
+
+const BookingManagers = Loadable({
+  loader: () => import('./containers/booking_manager/booking-managers'),
+  loading: Loading,
+})
+
 
 const routes = [
   // { path: '/', exact: true, name: 'Users', component: Users },
@@ -58,6 +68,8 @@ const routes = [
   { path: '/menus_sushi_yen', exact: true, name: 'MenuSushiYen', component: MenuSushiYen },
   { path: '/news', exact: true, name: 'News', component: News },
   { path: '/roles', exact: true, name: 'Roles', component: Roles },
+  { path: '/staffs', exact: true, name: 'Staffs', component: Staffs },
+  { path: '/booking_managers', exact: true, name: 'BookingManagers', component: BookingManagers },
 ];
 
 export default routes;

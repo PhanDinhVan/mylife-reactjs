@@ -186,9 +186,9 @@ class Users extends Component {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Gender</th>
-                <th>Role</th>
+                {/* <th>Role</th> */}
                 <th>Birthday</th>
-                <th>Status</th>
+                <th className="center">Status</th>
                 <th></th>
               </tr>
               </thead>
@@ -199,7 +199,7 @@ class Users extends Component {
                       <td>{user.profile ? user.profile.name : '' }</td>
                       <td>{user.email}</td>
                       <td className="text-capitalize">{user.profile ? user.profile.gender : ''}</td>
-                      <td className="text-capitalize">{user.role.name}</td>
+                      {/* <td className="text-capitalize">{user.role.name}</td> */}
                       <td>{user.profile ? user.profile.birthday : ''}</td>
                       <td align="center">
                         <Badge className="text-capitalize" color={user.status === "active" ? "success" : user.status === "inactive" ? "warning" : "secondary"}>{user.status}</Badge>

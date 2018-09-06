@@ -20,11 +20,7 @@ export default {
           url: '/reviews',
           icon: 'icon-note',
         },
-        {
-          name: 'Roles',
-          url: '/roles',
-          icon: 'fa fa-id-badge',
-        },
+        
       ],
     }, {
       name: 'MARKETING',
@@ -48,14 +44,19 @@ export default {
       icon: 'icon-settings',
       children: [
         {
+          name: 'BookingManagers',
+          url: '/booking_managers',
+          icon: 'fa fa-drivers-license-o',
+        },
+        {
           name: 'Companies',
           url: '/companies',
           icon: 'fa fa-fort-awesome',
         },
         {
-          name: 'Restaurants',
-          url: '/restaurants',
-          icon: 'fa fa-cutlery',
+          name: 'Menus My Life Coffee',
+          url: '/menu_mylife_coffee',
+          icon: 'icon-cup',
         },
         {
           name: 'Menus Sushi Yen',
@@ -63,9 +64,19 @@ export default {
           icon: 'fa fa-coffee',
         },
         {
-          name: 'Menu My Life Coffee',
-          url: '/menu_mylife_coffee',
-          icon: 'icon-cup',
+          name: 'Restaurants',
+          url: '/restaurants',
+          icon: 'fa fa-cutlery',
+        },
+        {
+          name: 'Roles',
+          url: '/roles',
+          icon: 'fa fa-id-badge',
+        },
+        {
+          name: 'Staffs',
+          url: '/staffs',
+          icon: 'fa fa-drivers-license-o',
         },
       ],
     },

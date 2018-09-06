@@ -1,4 +1,4 @@
-import Staffs from './staff';
+import Staffs from './staffs';
 import staffReducers from './staff-reducers';
 
 export {
