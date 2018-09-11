@@ -10,7 +10,6 @@ const listStatus = [null, 'active', 'inactive', 'ban'];
 const listGender = [null, 'male', 'female', 'other'];
 
 const ModalStaff = (props) => {
-  console.log(props)
   let title = '';
   let read_only = '';
   let btn_submit = '';
@@ -129,7 +128,7 @@ const ModalStaff = (props) => {
                       <option value="0">Select role</option>
                       {
                         props.roles.map(function (role, index) {
-                          if(role.id != 1){
+                          if(role.id !== 1){
                             return <option key={index} value={role.id} className="capitalize" >{role.name}</option>;        
                           }
                         })

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Input, Label, FormGroup, Button, 
   Modal, ModalBody, ModalFooter, ModalHeader,
-  Form, Row, FormText, Badge } from 'reactstrap';
+  Form, Row } from 'reactstrap';
 
 import { TimePicker } from 'antd';
 import moment from 'moment';
@@ -60,9 +60,9 @@ const ModalStatus = (props) => {
               </Col>
               <Col xs="4">
                 <FormGroup>
-                  <Label className="statusBooking" htmlFor="cvv">Nb person</Label>
+                  <Label className="statusBooking" htmlFor="cvv">Seats</Label>
                   <Input onChange={props.onChangeInput} className="center color-booking" 
-                    type="text" name="numberPerson" defaultValue={props.bookingAdd.numberPerson} />
+                    type="text" name="seats" defaultValue={props.bookingAdd.seats} />
                 </FormGroup>
               </Col>
             </Row>

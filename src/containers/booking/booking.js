@@ -21,7 +21,7 @@ class Bookings extends Component {
           id: '',
           status: '',
           time: moment(),
-          numberPerson: '',
+          seats: '',
           date: '',
           restaurants: ''
         },
@@ -30,7 +30,7 @@ class Bookings extends Component {
           shopId: '',
           status: 'waiting',
           time: moment(),
-          numberPerson: 1,
+          seats: 1,
           date: moment()
         },
         idBookingDelete: '',
@@ -45,7 +45,7 @@ class Bookings extends Component {
       booking.id = dataModal.id;
       booking.status = dataModal.state;
       booking.time = dataModal.time.slice(0,5);
-      booking.numberPerson = dataModal.numberPerson;
+      booking.seats = dataModal.seats;
       booking.date = dataModal.date;
       booking.restaurants = dataModal.shop.name +" - "+ dataModal.shop.address +" - "+ dataModal.shop.district;
       this.setState({
@@ -182,7 +182,7 @@ class Bookings extends Component {
                       <th className="center">Status</th>
                       <th>Date</th>
                       <th>Time</th>
-                      <th>Nb person</th>
+                      <th>Seats</th>
                       <th>Email</th>
                       <th>Restaurants</th>
                       <th></th>
@@ -197,7 +197,7 @@ class Bookings extends Component {
                           </td>
                           <td className="coutor" onClick={(e) => this.showModalEditStatus(booking)} >{booking.date}</td>
                           <td className="coutor" onClick={(e) => this.showModalEditStatus(booking)} >{booking.time.slice(0,5)}</td>
-                          <td className="center" onClick={(e) => this.showModalEditStatus(booking)} >{booking.numberPerson}</td>
+                          <td className="center" onClick={(e) => this.showModalEditStatus(booking)} >{booking.seats}</td>
                           <td className="coutor" onClick={(e) => this.showModalEditStatus(booking)} >{booking.user.email}</td>
                           <td className="coutor" onClick={(e) => this.showModalEditStatus(booking)} >{booking.shop.name} - {booking.shop.address} - {booking.shop.district}</td>
                           <td align="center" className="edit_delete">

@@ -9974,6 +9974,13 @@ body {
 .capitalize {
   text-transform: capitalize; }
 
+.selected-options {
+  min-height: calc(2.0625rem + 2px); }
+
+.listBookingManager {
+  padding-bottom: 5px;
+  padding-top: 5px; }
+
 html body .app.flex-row.align-items-center {
   height: 100vh; }
 

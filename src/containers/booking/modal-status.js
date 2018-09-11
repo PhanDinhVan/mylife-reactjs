@@ -38,8 +38,8 @@ const ModalStatus = (props) => {
               </Col>
               <Col xs="4">
                 <FormGroup>
-                  <Label className="statusBooking" htmlFor="cvv">Nb person</Label>
-                  <Input className="center color-booking" type="text" defaultValue={props.booking.numberPerson} readOnly />
+                  <Label className="statusBooking" htmlFor="cvv">Seats</Label>
+                  <Input className="center color-booking" type="text" defaultValue={props.booking.seats} readOnly />
                 </FormGroup>
               </Col>
             </Row>

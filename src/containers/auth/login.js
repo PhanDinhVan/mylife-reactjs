@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 
 import * as actions from './auth-actions';
 import background from '../../assets/img/brand/bg-login.jpg';
-import logo from '../../assets/img/brand/logo-mylifecoffee.png';
+import logo from '../../assets/img/brand/mylifecoffee.png';
 // import BackgroundSlideshow from 'react-background-slideshow';
 
 // import image1 from '../../assets/img/brand/bg-home-1.jpg';
@@ -15,12 +15,12 @@ import logo from '../../assets/img/brand/logo-mylifecoffee.png';
 class Login extends Component {
   state = {
     // serve
-    // email: 'philippe.nguyen@amagumolabs.com',
-    // password: 'gCJ40TQx',
+    email: 'philippe.nguyen@amagumolabs.com',
+    password: 'gCJ40TQx',
     
-    // localhost
-    email: 'vanpd.it@gmail.com',
-    password: 'Ae5FBzFQ',
+    // localhost   pdvan.it@gmail.com   bw34ToiG
+    // email: 'vanpd.it@gmail.com',
+    // password: 'Ae5FBzFQ',
     register: false
   }
   loginHandler = async () => {

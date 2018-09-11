@@ -13,7 +13,6 @@ export const fetchRole = () => {
     try {
       const { data } = await axios.get('roles');
       dispatch(fetchRoleSuccess(data.data));
-      console.log(data.data)
       return Promise.resolve();
     } catch (err) {
       return Promise.reject(err);
@@ -48,7 +47,6 @@ const deleteRoleSuccess = () => {
 }
 
 export const deleteRole = (idRoleDelete) => {
-  console.log(idRoleDelete)
   return async dispatch => {
     try {
       const { data } = await axios.delete('roles/delete/'+idRoleDelete);

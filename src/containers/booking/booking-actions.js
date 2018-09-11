@@ -48,7 +48,6 @@ const addBookingSuccess = (bookingAdd) => {
 }
 
 export const addBooking = (bookingAdd) => {
-  console.log(bookingAdd)
   return async dispatch => {
     try {
       const { data } = await axios.post('booking', bookingAdd);

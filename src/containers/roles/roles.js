@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Badge, Table, Button } from 'reactstrap';
+import { Table, Button } from 'reactstrap';
 
 import * as actions from './role-actions';
 import { toast } from 'react-toastify';
