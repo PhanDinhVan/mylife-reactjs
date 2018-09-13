@@ -52,8 +52,18 @@ const Staffs = Loadable({
   loading: Loading,
 })
 
-const BookingManagers = Loadable({
+const BookingPermissions = Loadable({
   loader: () => import('./containers/booking_manager/booking-managers'),
+  loading: Loading,
+})
+
+const Reviews = Loadable({
+  loader: () => import('./containers/reviews/reviews'),
+  loading: Loading,
+})
+
+const ReviewPermissions = Loadable({
+  loader: () => import('./containers/review_booking_manager/review-bmanagers'),
   loading: Loading,
 })
 
@@ -69,7 +79,9 @@ const routes = [
   { path: '/news', exact: true, name: 'News', component: News },
   { path: '/roles', exact: true, name: 'Roles', component: Roles },
   { path: '/staffs', exact: true, name: 'Staffs', component: Staffs },
-  { path: '/booking_managers', exact: true, name: 'BookingManagers', component: BookingManagers },
+  { path: '/booking_managers', exact: true, name: 'BookingPermissions', component: BookingPermissions },
+  { path: '/reviews', exact: true, name: 'Reviews', component: Reviews },
+  { path: '/review_bmanager', exact: true, name: 'ReviewPermissions', component: ReviewPermissions },
 ];
 
 export default routes;

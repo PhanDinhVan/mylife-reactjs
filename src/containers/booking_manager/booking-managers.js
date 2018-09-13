@@ -107,6 +107,7 @@ class BookingManagers extends Component {
     }
 
     showModalEdit = (dataModal) => {
+      console.log(dataModal.shop_user)
       const userbooking = {...this.state.userBooking};
       userbooking.id = dataModal.id;
       userbooking.userId = dataModal.userId;

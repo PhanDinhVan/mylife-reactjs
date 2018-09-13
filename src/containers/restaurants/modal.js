@@ -50,7 +50,7 @@ const ModalUser = (props) => {
                     <Label htmlFor="hf-type">Type</Label>
                 </Col>
                 <Col xs="12" md="6">
-                  <Input type="select" name="type" id="type" 
+                  <Input type="select" name="type" id="type" className="capitalize"
                        onChange={props.on_Change}>
                       {
                           listType.map((type, index) =>

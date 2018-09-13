@@ -208,9 +208,6 @@ class Users extends Component {
                         <span>
                           <i className="fa fa-edit fa-lg mt-4 icon_edit_del" onClick={(e) => this.showModalEditUser(user)} ></i>
                         </span>
-                        {/* <span>
-                          <i className="fa fa-trash-o fa-lg mt-4 icon_edit_del" onClick={(e) => this.showModalDeleted(user)} ></i>
-                        </span> */}
                       </td>
                     </tr>
                   )

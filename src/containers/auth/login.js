@@ -15,12 +15,12 @@ import logo from '../../assets/img/brand/mylifecoffee.png';
 class Login extends Component {
   state = {
     // serve
-    email: 'philippe.nguyen@amagumolabs.com',
-    password: 'gCJ40TQx',
+    // email: 'philippe.nguyen@amagumolabs.com',
+    // password: 'gCJ40TQx',
     
     // localhost   pdvan.it@gmail.com   bw34ToiG
-    // email: 'vanpd.it@gmail.com',
-    // password: 'Ae5FBzFQ',
+    email: 'vanpd.it@gmail.com',
+    password: 'Ae5FBzFQ',
     register: false
   }
   loginHandler = async () => {

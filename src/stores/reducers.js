@@ -10,6 +10,8 @@ import { newReducers } from '../containers/news';
 import { roleReducers }from '../containers/roles';
 import { staffReducers } from '../containers/staffs';
 import { bookingManagerReducers } from '../containers/booking_manager';
+import { reviewReducers } from '../containers/reviews';
+import { reviewBManagerReducers } from '../containers/review_booking_manager';
 
 const reducers = combineReducers({
   restaurantState: restaurantReducers,
@@ -23,6 +25,8 @@ const reducers = combineReducers({
   roleState: roleReducers,
   staffState: staffReducers,
   bookingMangerState: bookingManagerReducers,
+  reviewState: reviewReducers,
+  reviewBManagerState: reviewBManagerReducers,
 });
 
 export default reducers;

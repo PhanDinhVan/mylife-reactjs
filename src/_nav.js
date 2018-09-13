@@ -44,7 +44,7 @@ export default {
       icon: 'icon-settings',
       children: [
         {
-          name: 'BookingManagers',
+          name: 'Booking Permissions',
           url: '/booking_managers',
           icon: 'fa fa-drivers-license-o',
         },
@@ -67,6 +67,11 @@ export default {
           name: 'Restaurants',
           url: '/restaurants',
           icon: 'fa fa-cutlery',
+        },
+        {
+          name: 'Review Permissions',
+          url: '/review_bmanager',
+          icon: 'icon-note',
         },
         {
           name: 'Roles',
