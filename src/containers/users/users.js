@@ -7,6 +7,7 @@ import ModalEdit from './modal-edit';
 import ModalDelete from './modal-delete';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import moment from 'moment';
 
 
 class Users extends Component {
@@ -24,7 +25,7 @@ class Users extends Component {
           status: '',
           gender: null,
           email: '',
-          birthday: '',
+          birthday: moment(),
           passDelete: '',
           disableOk: true,
         },
@@ -45,7 +46,7 @@ class Users extends Component {
     user_temp.gender = dataModal.profile.gender;
     user_temp.name = dataModal.profile.name;
     user_temp.email = dataModal.email;
-    user_temp.birthday = dataModal.profile.birthday;
+    user_temp.birthday = moment(dataModal.profile.birthday);
     let idDelete = dataModal.id;
     this.setState({
       showModal: true,
@@ -57,6 +58,18 @@ class Users extends Component {
     this.setState({
       showModal: false,
       showInputPass: 'none',
+      user: {
+        id: '',
+        profileId: '',
+        roleId: '',
+        name: '',
+        status: '',
+        gender: null,
+        email: '',
+        birthday: moment(),
+        passDelete: '',
+        disableOk: true,
+      },
     });
   }
   handleChange = (event) => {
@@ -68,8 +81,14 @@ class Users extends Component {
     this.setState({
       showModal: false
     })
+    const user = {...this.state.user};
+    Object.keys(user).map(function(key, index) {
+      if (user[key]._d) {
+        user[key] = user[key]._d.toISOString().slice(0,10);
+      }
+    });
     try {
-      await this.props.onUpdateUser(this.state.user);
+      await this.props.onUpdateUser(user);
       toast("Update success !", {
         position: toast.POSITION.TOP_RIGHT
       });
@@ -120,7 +139,16 @@ class Users extends Component {
   showModalAddUser = () => {
     const user_ = {...this.props.user};
     user_.id = '';
+    user_.birthday = moment();
     this.setState({showModal: true, user: user_})
+  }
+  handleChangeBirthdayDate = (date) => {
+   
+    const user = {...this.state.user};
+    user.birthday = date;
+    this.setState({
+      user: user
+    });
   }
   addUserHandler = async () => {
     
@@ -155,9 +183,10 @@ class Users extends Component {
     let Modal = null;
     if (this.state.user != null) {
       Modal = <ModalEdit showModals={this.state.showModal} 
-                close_Modal={this.closeModal} 
+                closeModal={this.closeModal} 
                 obj_Modal={this.state.user}
                 on_Change={this.handleChange.bind()}
+                changeBirthday={this.handleChangeBirthdayDate.bind()}
                 on_Submit={this.updateUserHandler}
                 on_Submit_Add={this.addUserHandler}
                 load={this.state.loading}
@@ -186,7 +215,6 @@ class Users extends Component {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Gender</th>
-                {/* <th>Role</th> */}
                 <th>Birthday</th>
                 <th className="center">Status</th>
                 <th></th>
@@ -199,7 +227,6 @@ class Users extends Component {
                       <td>{user.profile ? user.profile.name : '' }</td>
                       <td>{user.email}</td>
                       <td className="text-capitalize">{user.profile ? user.profile.gender : ''}</td>
-                      {/* <td className="text-capitalize">{user.role.name}</td> */}
                       <td>{user.profile ? user.profile.birthday : ''}</td>
                       <td align="center">
                         <Badge className="text-capitalize" color={user.status === "active" ? "success" : user.status === "inactive" ? "warning" : "secondary"}>{user.status}</Badge>

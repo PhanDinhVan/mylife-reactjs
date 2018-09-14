@@ -10,6 +10,11 @@ import 'antd/dist/antd.css';
 const format = 'HH:mm';
 
 const ModalStatus = (props) => {
+    if(props.booking.passDelete === "12345") {
+      props.booking.disableOk = false;
+    } else {
+      props.booking.disableOk = true;
+    }
     return (
       <Modal isOpen={props.showModal} className={'modal-primary '}>
         <ModalHeader>Edit status</ModalHeader>
@@ -24,22 +29,30 @@ const ModalStatus = (props) => {
               </Col>
             </Row>
             <Row>
-              <Col xs="4">
+              <Col xs="6">
                 <FormGroup>
                   <Label className="statusBooking" htmlFor="cvv">Date</Label>
                   <Input className="center color-booking" type="text" defaultValue={props.booking.date} readOnly />
                 </FormGroup>
               </Col>
-              <Col xs="4">
+              <Col xs="6">
                 <FormGroup>
                   <Label className="statusBooking" htmlFor="cvv">Time</Label>
                   <Input className="center color-booking" type="text" defaultValue={props.booking.time} readOnly />
                 </FormGroup>
               </Col>
-              <Col xs="4">
+            </Row>
+            <Row>
+              <Col xs="6">
                 <FormGroup>
                   <Label className="statusBooking" htmlFor="cvv">Seats</Label>
                   <Input className="center color-booking" type="text" defaultValue={props.booking.seats} readOnly />
+                </FormGroup>
+              </Col>
+              <Col xs="6">
+                <FormGroup>
+                  <Label className="statusBooking" htmlFor="cvv">Baby seats</Label>
+                  <Input className="center color-booking" type="text" defaultValue={props.booking.baby_seats} readOnly />
                 </FormGroup>
               </Col>
             </Row>
@@ -107,11 +120,25 @@ const ModalStatus = (props) => {
                   </div>
                 </Col>
               </FormGroup>
+              <FormGroup row style={{display: props.showInputPass}}>
+                <Col xs="12" md="9">
+                    <Input type="password" id="hf-passDelete" name="passDelete"
+                      onChange={props.onChangeStatus} placeholder="Enter password..." />
+                </Col>
+                <Col md="3">
+                  <Button disabled={props.booking.disableOk} color="success" onClick={props.deleteSubmit} >Ok</Button>
+                </Col>
+              </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={props.onSubmit} color="primary" >Save</Button>{' '}
-          <Button onClick={props.closeModal} color="secondary" >Cancel</Button>
+          <Col md="6">
+            <Button color="danger" style={{display: props.booking.id ? " " : "none"}} onClick={props.showTextDelete} >Delete</Button>{' '}
+          </Col>
+          <Col md="6" className="md6-right">
+            <Button className="cancel" onClick={props.closeModal} color="secondary" >Cancel</Button>
+            <Button onClick={props.onSubmit} color="primary" >Save</Button>{' '}
+          </Col>
         </ModalFooter>
         
       </Modal>

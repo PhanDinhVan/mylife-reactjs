@@ -85,7 +85,6 @@ const ModalReview = (props) => {
           </Form>
         </ModalBody>
         <ModalFooter>
-          
           <Col md="6">
             <Button color="danger" style={{display: props.review.id ? " " : "none"}} onClick={props.showTextDelete} >Delete</Button>{' '}
           </Col>

@@ -2,7 +2,8 @@ import React from 'react';
 import { Col, Input, Label, FormGroup, Button, 
   Modal, ModalBody, ModalFooter, ModalHeader,
   Form, Row } from 'reactstrap';
-  import  MultiSelectReact  from 'multi-select-react';
+import  MultiSelectReact  from 'multi-select-react';
+import { PulseLoader } from 'react-spinners';
 
 
 const ModalBookingManager = (props) => {
@@ -40,9 +41,16 @@ const ModalBookingManager = (props) => {
                 </FormGroup>
               </Col>
             </Row>
+            <div className='sweet-loading'>
+              <PulseLoader
+                color={'#20a8d8'} 
+                loading={props.load} 
+              />
+            </div>
             <Row>
               <Col xs="12">
                 <FormGroup>
+                  <Label htmlFor="cvv">Restaurants</Label>
                   <MultiSelectReact 
                     options={props.multiSelect}
                     optionClicked={props.optionClick}

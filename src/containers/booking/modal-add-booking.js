@@ -33,7 +33,7 @@ const ModalStatus = (props) => {
               </Col>
             </Row>
             <Row>
-              <Col xs="4">
+              <Col xs="6">
                 <FormGroup>
                   <Label className="statusBooking" htmlFor="cvv">Date</Label>
                   <DatePicker
@@ -45,10 +45,10 @@ const ModalStatus = (props) => {
                       dropdownMode="select"
                       id="date"
                       name="date"
-                      className="form-control center" />
+                      className="form-control center widthaddbooking" />
                 </FormGroup>
               </Col>
-              <Col xs="4">
+              <Col xs="6">
                 <FormGroup>
                   <Label className="statusBooking" htmlFor="cvv">Time</Label>
                   <div className="time">
@@ -58,11 +58,20 @@ const ModalStatus = (props) => {
                   </div>
                 </FormGroup>
               </Col>
-              <Col xs="4">
+            </Row>
+            <Row>
+              <Col xs="6">
                 <FormGroup>
                   <Label className="statusBooking" htmlFor="cvv">Seats</Label>
-                  <Input onChange={props.onChangeInput} className="center color-booking" 
+                  <Input onChange={props.onChangeInput} className="center color-booking widthaddbooking" 
                     type="text" name="seats" defaultValue={props.bookingAdd.seats} />
+                </FormGroup>
+              </Col>
+              <Col xs="6">
+                <FormGroup>
+                  <Label className="statusBooking" htmlFor="cvv">Baby seats</Label>
+                  <Input onChange={props.onChangeInput} className="center color-booking widthaddbooking" 
+                    type="text" name="baby_seats" defaultValue={props.bookingAdd.baby_seats} />
                 </FormGroup>
               </Col>
             </Row>
@@ -121,8 +130,8 @@ const ModalStatus = (props) => {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={props.submitAdd} color="primary" >Add</Button>{' '}
           <Button onClick={props.closeModalAdd} color="secondary" >Cancel</Button>
+          <Button onClick={props.submitAdd} color="primary" >Add</Button>{' '}
         </ModalFooter>
         
       </Modal>

@@ -21,6 +21,7 @@ class BookingManagers extends Component {
           restaurants: [],
         },
         multiSelect: [],
+        loading: false,
       }
     }
     componentDidMount() {
@@ -83,12 +84,15 @@ class BookingManagers extends Component {
       userBooking.restaurants = listIdRestaurant;
       
       try {
+        this.setState({loading: true})
         await this.props.onAddBookingManager(userBooking);
+        this.setState({loading: false})
         toast("Add success !", {
           position: toast.POSITION.TOP_RIGHT
         });
         this.props.onFetchBookingManager();
       } catch (err) {
+        this.setState({loading: false})
         console.log(err)
       }
       
@@ -107,17 +111,22 @@ class BookingManagers extends Component {
     }
 
     showModalEdit = (dataModal) => {
-      console.log(dataModal.shop_user)
+      console.log(dataModal)
       const userbooking = {...this.state.userBooking};
       userbooking.id = dataModal.id;
       userbooking.userId = dataModal.userId;
       userbooking.restaurants.push(dataModal.shopId);
 
+      // get list shop when edit
+      var listShopId = dataModal.shop_user;
       var listMultiSelect = this.state.multiSelect;
+      
       listMultiSelect.forEach(function(element) {
-        if (element.id === dataModal.shopId) {
-          element.value = true;
-        }
+        listShopId.forEach(function(item) {
+          if(element.id === item.shopId) {
+            element.value = true;
+          }
+        });
       });
 
       this.setState({
@@ -141,7 +150,7 @@ class BookingManagers extends Component {
       this.setState({
         showModal: false
       })
-      console.log(userBooking)
+      // console.log(userBooking)
       // try {
       //   await this.props.onUpdateBookingManager(userBooking);
       //   toast("Update success !", {
@@ -172,14 +181,15 @@ class BookingManagers extends Component {
               optionsListStyle={optionsListStyles}
               onSubmitAdd={this.handleAddBookingManager}
               onSubmitEdit={this.handleUpdateBookingManager}
-              objUserBooking={this.state.userBooking} />
+              objUserBooking={this.state.userBooking}
+              load={this.state.loading} />
             <div className="card">
               <div className="card-header">
-                <i className="icon-map"></i> Booking Manager List
+                <i className="icon-map"></i> Booking Permissions List
               </div>
               <div className="card-body">
                 <Button color="primary" onClick={this.showModalAdd}
-                  style={{marginBottom: '20px'}} >Add booking manager</Button>
+                  style={{marginBottom: '20px'}} >Add booking permissions</Button>
                 <Table responsive striped bordered hover>
                   <thead>
                     <tr>

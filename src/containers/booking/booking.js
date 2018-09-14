@@ -22,8 +22,11 @@ class Bookings extends Component {
           status: '',
           time: moment(),
           seats: '',
+          baby_seats: '',
           date: '',
-          restaurants: ''
+          restaurants: '',
+          passDelete: '',
+          disableOk: true,
         },
         showModalAdd: false,
         bookingAdd: {
@@ -31,9 +34,11 @@ class Bookings extends Component {
           status: 'waiting',
           time: moment(),
           seats: 1,
+          baby_seats: 0,
           date: moment()
         },
         idBookingDelete: '',
+        showInputPass: 'none',
         showModalDelete: false,
       }
     }
@@ -46,15 +51,32 @@ class Bookings extends Component {
       booking.status = dataModal.state;
       booking.time = dataModal.time.slice(0,5);
       booking.seats = dataModal.seats;
+      booking.baby_seats = dataModal.baby_seats;
       booking.date = dataModal.date;
       booking.restaurants = dataModal.shop.name +" - "+ dataModal.shop.address +" - "+ dataModal.shop.district;
+      let idDelete = dataModal.id;
       this.setState({
         showModal: true,
-        booking: booking
+        booking: booking,
+        idBookingDelete: idDelete,
       })
     }
     closeModalEditStatus = () => {
-      this.setState({showModal: false})
+      this.setState({
+        showModal: false,
+        showInputPass: 'none',
+        booking: {
+          id: '',
+          status: '',
+          time: moment(),
+          seats: '',
+          baby_seats: '',
+          date: '',
+          restaurants: '',
+          passDelete: '',
+          disableOk: true,
+        },
+      })
     }
     handleChange = (event) => {
       const booking = {...this.state.booking};
@@ -98,7 +120,7 @@ class Bookings extends Component {
     }
     handleChangeTimeAdd = (event) => {
       const bookingAdd = {...this.state.bookingAdd};
-      bookingAdd.time = moment(event._d).format('HH:mm');
+      bookingAdd.time = event;
       this.setState({ bookingAdd: bookingAdd });
     }
     handleChangeAdd = (event) => {
@@ -109,6 +131,8 @@ class Bookings extends Component {
     handleAddBooking = async () => {
       this.setState({showModalAdd: false});
       const booking = {...this.state.bookingAdd}
+      
+      booking.time = moment(booking.time).format('HH:mm');
       Object.keys(booking).map(function(key, index) {
         if (booking[key]._d) {
           booking[key] = booking[key]._d.toISOString().slice(0,10);
@@ -123,9 +147,15 @@ class Bookings extends Component {
       } catch (err) {
         console.log(err)
       }
+      const book = {...this.state.booking}
+      book.time = moment();
+      book.seats = 1;
+      book.baby_seats = 0;
+      book.date = moment();
+      book.status = 'waiting';
+      this.setState({bookingAdd: book})
     }
     showModalDeleteBooking = (bookingDelete) => {
-      console.log(bookingDelete.id)
       this.setState({
         idBookingDelete: bookingDelete.id,
         showModalDelete: true
@@ -134,29 +164,49 @@ class Bookings extends Component {
     closeModalDeleteBooking = () => {
       this.setState({showModalDelete: false})
     }
-    deleteNewsHandle = async () => {
-      this.setState({
-        showModalDelete: false
-      })
+    deleteBookingHandle = async () => {
       try {
         await this.props.onDeleteBooking(this.state.idBookingDelete);
         toast("Delete success !", {
           position: toast.POSITION.TOP_RIGHT
         });
         this.props.onFetchBooking();
+        this.setState({showInputPass: 'none'})
       } catch (err) {
         console.log(err)
       }
+      this.setState({
+        showModal: false,
+        booking: {
+          id: '',
+          status: '',
+          time: moment(),
+          seats: '',
+          baby_seats: '',
+          date: '',
+          restaurants: '',
+          passDelete: '',
+          disableOk: true,
+        },
+      })
+    }
+    showTextPasswordDelete = () => {
+      this.setState({
+        showInputPass: '',
+      })
     }
     render() {
         return(
           <div className="animated fadeIn">
             <ModalEditStatus showModal={this.state.showModal}
                 closeModal={this.closeModalEditStatus}
-                onChangeStatus={this.handleChange}
+                onChangeStatus={this.handleChange.bind()}
                 onSubmit={this.updateStatusHandler}
                 booking={this.state.booking}
-                onChangeTime={this.handleChangeTime} />
+                onChangeTime={this.handleChangeTime}
+                showInputPass={this.state.showInputPass}
+                showTextDelete={this.showTextPasswordDelete}
+                deleteSubmit={this.deleteBookingHandle} />
             <ModalAddBooking showModalAdd={this.state.showModalAdd}
               closeModalAdd={this.closeModalAddBooking}
               listRestaurant={this.props.restaurants}
@@ -166,9 +216,9 @@ class Bookings extends Component {
               onChangeInput={this.handleChangeAdd}
               onChangeStatus={this.handleChangeAdd}
               submitAdd={this.handleAddBooking} />
-            <ModalDelete showModalDelete={this.state.showModalDelete}
+            {/* <ModalDelete showModalDelete={this.state.showModalDelete}
               closeModalDelete={this.closeModalDeleteBooking}
-              deleteSubmit={this.deleteNewsHandle} />
+              deleteSubmit={this.deleteNewsHandle} /> */}
             <div className="card">
               <div className="card-header">
                 <i className="icon-map"></i> Booking List
@@ -183,9 +233,10 @@ class Bookings extends Component {
                       <th>Date</th>
                       <th>Time</th>
                       <th>Seats</th>
+                      <th>Baby seats</th>
                       <th>Email</th>
                       <th>Restaurants</th>
-                      <th></th>
+                      {/* <th></th> */}
                     </tr>
                   </thead>
                   <tbody>
@@ -198,13 +249,14 @@ class Bookings extends Component {
                           <td className="coutor" onClick={(e) => this.showModalEditStatus(booking)} >{booking.date}</td>
                           <td className="coutor" onClick={(e) => this.showModalEditStatus(booking)} >{booking.time.slice(0,5)}</td>
                           <td className="center" onClick={(e) => this.showModalEditStatus(booking)} >{booking.seats}</td>
+                          <td className="center" onClick={(e) => this.showModalEditStatus(booking)} >{booking.baby_seats}</td>
                           <td className="coutor" onClick={(e) => this.showModalEditStatus(booking)} >{booking.user.email}</td>
                           <td className="coutor" onClick={(e) => this.showModalEditStatus(booking)} >{booking.shop.name} - {booking.shop.address} - {booking.shop.district}</td>
-                          <td align="center" className="edit_delete">
+                          {/* <td align="center" className="edit_delete">
                             <span>
                               <i className="fa fa-trash-o fa-lg mt-4 icon_edit_del" onClick={(e) => this.showModalDeleteBooking(booking)} ></i>
                             </span>
-                        </td>
+                          </td> */}
                         </tr>
                       )
                     })}

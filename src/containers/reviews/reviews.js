@@ -33,13 +33,22 @@ class Reviews extends Component {
     componentDidMount() {
       this.props.onFetchReviews();
     }
-    // showModalAdd = () => {
-    //   this.setState({showModal: true})
-    // }
     closeModal = () => {
       this.setState({
         showModal: false, 
         showInputPass: 'none',
+        review: {
+          id: '',
+          name: '',
+          email: '',
+          phone: '',
+          score: '',
+          comment: '',
+          restaurant: '',
+          review_date: '',
+          passDelete: '',
+          disableOk: true,
+        },
       })
     }
     showModalReview = (dataModal) => {
@@ -73,6 +82,18 @@ class Reviews extends Component {
       }
       this.setState({
         showModal: false,
+        review: {
+          id: '',
+          name: '',
+          email: '',
+          phone: '',
+          score: '',
+          comment: '',
+          restaurant: '',
+          review_date: '',
+          passDelete: '',
+          disableOk: true,
+        },
       })
     }
     showTextPasswordDelete = () => {
