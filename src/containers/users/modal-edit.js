@@ -31,7 +31,7 @@ const ModalUser = (props) => {
       props.obj_Modal.disableOk = true;
     }
     return (
-      <Modal isOpen={props.showModals} className={'modal-primary '}>
+      <Modal isOpen={props.showModals} className={'modal-primary'}>
         <ModalHeader>{title}</ModalHeader>
         <ModalBody>
           <Form action="" method="post" className="form-horizontal">
@@ -51,6 +51,15 @@ const ModalUser = (props) => {
               <Col xs="12" md="9">
                   <Input type="text" id="hf-email" name="email" readOnly={read_only} 
                     defaultValue={props.obj_Modal.email} onChange={props.on_Change} />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Col md="3">
+                  <Label htmlFor="hf-phone">Phone</Label>
+              </Col>
+              <Col xs="12" md="6">
+                  <Input type="text" id="hf-phone" name="phone"
+                    defaultValue={props.obj_Modal.phone} onChange={props.on_Change} />
               </Col>
             </FormGroup>
             <div className='sweet-loading'>

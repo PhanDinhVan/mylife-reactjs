@@ -10,6 +10,7 @@ import moment from 'moment';
 import ModalAddBooking from './modal-add-booking';
 import * as actionsRestaurant from '../restaurants/restaurant-actions';
 import ModalDelete from './modal-delete';
+import actionLogin from '../auth/auth-actions';
 
 class Bookings extends Component {
     constructor(props) {
@@ -27,6 +28,7 @@ class Bookings extends Component {
           restaurants: '',
           passDelete: '',
           disableOk: true,
+          comments: '',
         },
         showModalAdd: false,
         bookingAdd: {
@@ -35,7 +37,8 @@ class Bookings extends Component {
           time: moment(),
           seats: 1,
           baby_seats: 0,
-          date: moment()
+          date: moment(),
+          comments: '',
         },
         idBookingDelete: '',
         showInputPass: 'none',
@@ -44,6 +47,7 @@ class Bookings extends Component {
     }
     componentDidMount() {
       this.props.onFetchBooking();
+      this.props.onFetchRestaurantBooking();
     }
     showModalEditStatus = (dataModal) => {
       const booking = {...this.state.booking};
@@ -53,6 +57,7 @@ class Bookings extends Component {
       booking.seats = dataModal.seats;
       booking.baby_seats = dataModal.baby_seats;
       booking.date = dataModal.date;
+      booking.comments = dataModal.comments;
       booking.restaurants = dataModal.shop.name +" - "+ dataModal.shop.address +" - "+ dataModal.shop.district;
       let idDelete = dataModal.id;
       this.setState({
@@ -104,6 +109,7 @@ class Bookings extends Component {
     }
     showModalAddBooking = () => {
       this.props.onFetchRestaurant();
+      this.props.onFetchRestaurantBooking();
       this.setState({
         showModalAdd: true,
       });
@@ -209,7 +215,8 @@ class Bookings extends Component {
                 deleteSubmit={this.deleteBookingHandle} />
             <ModalAddBooking showModalAdd={this.state.showModalAdd}
               closeModalAdd={this.closeModalAddBooking}
-              listRestaurant={this.props.restaurants}
+              // listRestaurant={this.props.restaurants}
+              listRestaurant={this.props.restaurantBooking}
               bookingAdd={this.state.bookingAdd}
               onChangeDate={this.handleChangeDate}
               onChangeTime={this.handleChangeTimeAdd}
@@ -234,9 +241,9 @@ class Bookings extends Component {
                       <th>Time</th>
                       <th>Seats</th>
                       <th>Baby seats</th>
-                      <th>Email</th>
+                      <th>Customer name</th>
                       <th>Restaurants</th>
-                      {/* <th></th> */}
+                      <th>Comments</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -250,13 +257,9 @@ class Bookings extends Component {
                           <td className="coutor" onClick={(e) => this.showModalEditStatus(booking)} >{booking.time.slice(0,5)}</td>
                           <td className="center" onClick={(e) => this.showModalEditStatus(booking)} >{booking.seats}</td>
                           <td className="center" onClick={(e) => this.showModalEditStatus(booking)} >{booking.baby_seats}</td>
-                          <td className="coutor" onClick={(e) => this.showModalEditStatus(booking)} >{booking.user.email}</td>
+                          <td className="coutor" onClick={(e) => this.showModalEditStatus(booking)} >{booking.profile.name}</td>
                           <td className="coutor" onClick={(e) => this.showModalEditStatus(booking)} >{booking.shop.name} - {booking.shop.address} - {booking.shop.district}</td>
-                          {/* <td align="center" className="edit_delete">
-                            <span>
-                              <i className="fa fa-trash-o fa-lg mt-4 icon_edit_del" onClick={(e) => this.showModalDeleteBooking(booking)} ></i>
-                            </span>
-                          </td> */}
+                          <td className="coutor" onClick={(e) => this.showModalEditStatus(booking)} >{booking.comments}</td>
                         </tr>
                       )
                     })}
@@ -273,6 +276,7 @@ const mapStateToProps = state => {
   return {
     bookings: state.bookingState.bookings,
     restaurants: state.restaurantState.restaurants,
+    restaurantBooking: state.restaurantState.restaurantBooking,
   };
 };
 
@@ -281,6 +285,7 @@ const mapDispatchToProps = dispatch => {
     onFetchBooking: () => dispatch(actions.fetchBooking()),
     onUpdateStatus: (statusUpdate) => dispatch(actions.updateStatus(statusUpdate)),
     onFetchRestaurant: () => dispatch(actionsRestaurant.fetchRestaurant()),
+    onFetchRestaurantBooking: () => dispatch(actionsRestaurant.fetchRestaurantBooking()),
     onAddBookings: (bookingAdd) => dispatch(actions.addBooking(bookingAdd)),
     onDeleteBooking: (bookingDelete) => dispatch(actions.deleteBooking(bookingDelete)),
   };

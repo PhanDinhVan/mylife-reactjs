@@ -22,19 +22,21 @@ const ModalNews = (props) => {
       title = 'Edit News';
       btn_submit = 'Save';
       click_submit = props.onSubmitEdit;
-      // srcImg = 'http://localhost/project/laravel/mylife-api/'+props.objNewsEdit.photo;
-      srcImg = 'http://mylifecompanyapp.amagumolabs.io/api/'+props.objNewsEdit.photo;
       url = props.objNewsEdit.url;
-      // str.replace(/\s+/g, '-');
     } else {
       title = 'Add News';
       btn_submit = 'Add';
       click_submit = props.onSubmitAdd;
       url = props.objNewsEdit.name;
     }
+    if(props.objNewsEdit.passDelete === "12345") {
+      props.objNewsEdit.disableOk = false;
+    } else {
+      props.objNewsEdit.disableOk = true;
+    }
     
     return (
-      <Modal isOpen={props.showModal} className={'modal-lg'}>
+      <Modal isOpen={props.showModal} className={'modal-primary'}>
         <ModalHeader>{title}</ModalHeader>
         <ModalBody>
           <Form action="" method="post" className="form-horizontal">
@@ -53,11 +55,18 @@ const ModalNews = (props) => {
               </Col>
               <Col xs="12" md="9">
                   <Input type="text" id="hf-url" name="url" 
-                    defaultValue={url} onChange={props.onChangeInput} />
+                    defaultValue={props.objNewsEdit.url} onChange={props.onChangeInput} />
               </Col>
             </FormGroup>
             <FormGroup row>
               <Col md="3">
+                  <Label htmlFor="hf-name">Image</Label>
+              </Col>
+              <Col xs="12" md="9">
+                  <Input type="text" id="hf-image" name="photo" 
+                    defaultValue={props.objNewsEdit.photo} onChange={props.onChangeInput} />
+              </Col>
+              {/* <Col md="3">
                 <Label htmlFor="file-input">Image</Label>
               </Col>
               <Col xs="12" md="9">
@@ -66,7 +75,7 @@ const ModalNews = (props) => {
                 : null }
                 <Input type="file" id="file-input" name="photo" 
                   onChange={props.changeImage} />
-              </Col>
+              </Col> */}
             </FormGroup>
             <div className='sweet-loading'>
               <PulseLoader
@@ -78,15 +87,7 @@ const ModalNews = (props) => {
               <Col md="3">
                   <Label htmlFor="type">Status</Label>
               </Col>
-              <Col xs="12" md="6">
-                {/* <Input type="select" name="status" id="status" 
-                  value={props.objNewsEdit.status}  onChange={props.onChangeInput}>
-                    {
-                        listStatus.map((status, index) =>
-                        <option key={index} value={status}>{status}</option>
-                        )
-                    }
-                </Input> */}
+              <Col md="9" xs="12">
                 <FormGroup check inline>
                     <Input className="form-check-input" defaultChecked={props.objNewsEdit.status==="publish"} 
                         type="radio" id="inline-radio1" name="status" 
@@ -140,25 +141,28 @@ const ModalNews = (props) => {
                     className="form-control" />
                 </Col>
               </FormGroup>
-            <FormGroup row>
-              <Col md="3">
-                  <Label htmlFor="hf-name">Content</Label>
-              </Col>
-              <Col xs="12" md="9">
-                  <ReactQuill theme="snow"
-                    modules={props.modules}
-                    formats={props.formats}
-                    id="hf-content" name="content"
-                    placeholder="Content....."
-                    defaultValue={props.objNewsEdit.content} 
-                    onChange={props.onChangeContent} />
-              </Col>
-            </FormGroup>
+                <FormGroup row style={{display: props.showInputPass}}>
+                <Col md="3">
+                    <Label htmlFor="hf-passDelete"></Label>
+                </Col>
+                <Col xs="12" md="6">
+                    <Input type="password" id="hf-passDelete" name="passDelete"
+                      onChange={props.onChangeInput} placeholder="Enter password..." />
+                </Col>
+                <Col md="3">
+                  <Button disabled={props.objNewsEdit.disableOk} color="success" onClick={props.deleteSubmit} >Ok</Button>
+                </Col>
+              </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={click_submit} color="primary" >{btn_submit}</Button>{' '}
-          <Button onClick={props.closeModal} color="secondary" >Cancel</Button>
+          <Col md="6">
+            <Button color="danger" style={{display: props.objNewsEdit.id ? " " : "none"}} onClick={props.showTextDelete}  >Delete</Button>{' '}
+          </Col>
+          <Col md="6" className="md6-right">
+            <Button className="cancel" onClick={props.closeModal} color="secondary" >Cancel</Button>
+            <Button onClick={click_submit} color="primary" >{btn_submit}</Button>{' '}
+          </Col>
         </ModalFooter>
         
       </Modal>

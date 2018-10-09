@@ -25,6 +25,7 @@ class Users extends Component {
           status: '',
           gender: null,
           email: '',
+          phone: '',
           birthday: moment(),
           passDelete: '',
           disableOk: true,
@@ -46,6 +47,7 @@ class Users extends Component {
     user_temp.gender = dataModal.profile.gender;
     user_temp.name = dataModal.profile.name;
     user_temp.email = dataModal.email;
+    user_temp.phone = dataModal.profile.phone;
     user_temp.birthday = moment(dataModal.profile.birthday);
     let idDelete = dataModal.id;
     this.setState({
@@ -66,6 +68,7 @@ class Users extends Component {
         status: '',
         gender: null,
         email: '',
+        phone: '',
         birthday: moment(),
         passDelete: '',
         disableOk: true,
@@ -130,6 +133,7 @@ class Users extends Component {
         status: '',
         gender: null,
         email: '',
+        phone: '',
         birthday: '',
         passDelete: '',
         disableOk: true,
@@ -214,6 +218,7 @@ class Users extends Component {
               <tr>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Phone</th>
                 <th>Gender</th>
                 <th>Birthday</th>
                 <th className="center">Status</th>
@@ -226,6 +231,7 @@ class Users extends Component {
                     <tr key={user.id}>
                       <td>{user.profile ? user.profile.name : '' }</td>
                       <td>{user.email}</td>
+                      <td>{user.profile ? user.profile.phone : ''}</td>
                       <td className="text-capitalize">{user.profile ? user.profile.gender : ''}</td>
                       <td>{user.profile ? user.profile.birthday : ''}</td>
                       <td align="center">
@@ -252,7 +258,7 @@ class Users extends Component {
 
 const mapStateToProps = state => {
   return {
-    users: state.userState.users
+    users: state.userState.users,
   };
 };
 

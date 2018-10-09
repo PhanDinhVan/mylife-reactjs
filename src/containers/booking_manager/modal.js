@@ -19,6 +19,11 @@ const ModalBookingManager = (props) => {
     btn_submit = "Add";
     click_submit = props.onSubmitAdd;
   }
+  if(props.objUserBooking.passDelete === "12345") {
+    props.objUserBooking.disableOk = false;
+  } else {
+    props.objUserBooking.disableOk = true;
+  }
     return (
       <Modal isOpen={props.showModal} className={'modal-primary '}>
         <ModalHeader>{title}</ModalHeader>
@@ -61,12 +66,27 @@ const ModalBookingManager = (props) => {
                 </FormGroup>
               </Col>
             </Row>
+            <FormGroup row style={{display: props.showInputPass}}>
+              <Col xs="12" md="9">
+                  <Input type="password" id="hf-passDelete" name="passDelete"
+                    onChange={props.onChangeInput} placeholder="Enter password..." />
+              </Col>
+              <Col md="3">
+                <Button disabled={props.objUserBooking.disableOk} color="success" onClick={props.deleteSubmit} >Ok</Button>
+              </Col>
+            </FormGroup>
               
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={click_submit} color="primary" >{btn_submit}</Button>{' '}
-          <Button onClick={props.closeModal} color="secondary" >Cancel</Button>
+          
+          <Col md="6">
+            <Button color="danger" style={{display: props.objUserBooking.id ? " " : "none"}} onClick={props.showTextDelete} >Delete</Button>{' '}
+          </Col>
+          <Col md="6" className="md6-right">
+            <Button className="cancel" onClick={props.closeModal} color="secondary" >Cancel</Button>
+            <Button onClick={click_submit} color="primary" >{btn_submit}</Button>{' '}
+          </Col>
         </ModalFooter>
         
       </Modal>

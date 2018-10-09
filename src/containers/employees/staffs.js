@@ -97,7 +97,7 @@ class Staffs extends Component {
       this.setState({loading: true})
       await this.props.onAddStaff(staff);
       this.setState({loading: false})
-      toast("Add staff success !", {
+      toast("Add employee success !", {
         position: toast.POSITION.TOP_RIGHT
       });
       this.setState({
@@ -175,11 +175,11 @@ class Staffs extends Component {
           deleteStaff={this.handlerDeleteStaff} />
         <div className="card">
           <div className="card-header">
-            <i className="icon-people"></i> Staff List
+            <i className="icon-people"></i> Employees List
           </div>
           <div className="card-body">
           <Button color="primary" onClick={this.showModalAddStaff}
-              style={{marginBottom: '20px'}} >Add staff</Button>
+              style={{marginBottom: '20px'}} >Add employee</Button>
           <Table responsive striped bordered hover>
             <thead>
               <tr>

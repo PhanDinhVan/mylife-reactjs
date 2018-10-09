@@ -113,7 +113,6 @@ class Promotions extends Component {
                     <tr>
                       <th>Id</th>
                       <th>Name</th>
-                      {/* <th>Created by user</th> */}
                       <th>Start date</th>
                       <th>End date</th>
                       <th className="center">Status</th>
@@ -126,22 +125,14 @@ class Promotions extends Component {
                         <tr key={promotion.id}>
                           <td>{promotion.id}</td>
                           <td>{promotion.name}</td>
-                          {/* <td>{promotion.user}</td> */}
                           <td>{promotion.startDate ? promotion.startDate : ''}</td>
                           <td>{promotion.endDate ? promotion.endDate : ''}</td>
-                          <td align="center" >
+                          <td align="center" className="capitalize" >
                             <Badge className="text-capitalize" color={promotion.status === "not_start" ? "warning" : promotion.status === "in_progress" ? "success" : promotion.status === "completed" ? "secondary" : "danger"}>{promotion.status}</Badge>
                           </td>
-                          {/* <td align="center">
-                            <Button color="dark" size="xs">Edit</Button>
-                            <Button className="ml-1" color="danger" size="xs">Delete</Button>
-                          </td> */}
                           <td align="center" className="edit_delete">
                             <span>
                               <i className="fa fa-edit fa-lg mt-4 icon_edit_del" ></i>
-                            </span>
-                            <span>
-                              <i className="fa fa-trash-o fa-lg mt-4 icon_edit_del"></i>
                             </span>
                           </td>
                         </tr>

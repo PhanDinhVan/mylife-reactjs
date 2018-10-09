@@ -12,13 +12,23 @@ import {
   AppSidebarNav,
 } from '@coreui/react';
 // sidebar nav config
-import navigation from '../../_nav';
+import navSuperAdmin from '../../_nav';
+import navUserMylife from '../../_nav1';
 // routes config
 import routes from '../../routes';
 import Header from './Header';
+import * as actions from '../../containers/auth/auth-actions';
+import { connect } from 'react-redux';
 
 class Layout extends Component {
   render() {
+    let navigation = '';
+    let role = this.props.roleName;
+    if (role.roleName === "super admin") {
+      navigation = navSuperAdmin;
+    } else {
+      navigation = navUserMylife;
+    }
     return (
       <div className="app">
         <AppHeader fixed>
@@ -53,4 +63,17 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+// export default Layout;
+const mapStateToProps = state => {
+  return {
+    roleName: state.authState.roleName
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: (email, password) => dispatch(actions.login(email, password))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);

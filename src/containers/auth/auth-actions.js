@@ -1,12 +1,13 @@
 import * as actionTypes from './auth-action-types';
 import axios from '../../config/axios';
 
-const loginSuccess = (token, user, expiresIn) => {
+const loginSuccess = (token, user, expiresIn, roleName) => {
   return {
     type: actionTypes.AUTH_LOGIN,
     token,
     expiresIn,
-    userData: user
+    userData: user,
+    roleName: roleName,
   };
 };
 
@@ -14,7 +15,9 @@ export const login = (email, password) => {
   return async dispatch => {
     try {
       const { data } = await axios.post('auth/login', { email, password });
-      dispatch(loginSuccess(data.access_token, data.user, data.expires_in * 1000));
+      dispatch(loginSuccess(data.access_token, data.user, data.expires_in * 1000, data.roleName));
+      localStorage.setItem('tokenVan', data.access_token);
+      localStorage.setItem('roleName', JSON.stringify(data.roleName));
       return Promise.resolve();
     } catch (err) {
       return Promise.reject(err);

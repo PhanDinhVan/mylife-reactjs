@@ -19,3 +19,22 @@ export const fetchRestaurant = () => {
     }
   };
 };
+
+const fetchRestaurantBookingSuccess = (restaurantBooking) => {
+  return {
+    type: actionTypes.FETCH_RESTAURANT_BOOKING,
+    restaurantBooking
+  };
+};
+
+export const fetchRestaurantBooking = () => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.get('shopBooking');
+      dispatch(fetchRestaurantBookingSuccess(data.userbookings));
+      return Promise.resolve();
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  };
+};

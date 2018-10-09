@@ -20,38 +20,17 @@ class News extends Component {
         name: '',
         content: '',
         url: '',
-        photo: null,
+        photo: '',
         status: '',
         displayImg: true,
         publishedDate: moment(),
+        passDelete: '',
+        disableOk: true,
       },
       loading: false,
       idNewsDelete: '',
-      showModalDelete: false,
-      
-      modules: {
-        toolbar: [
-          [{ 'header': [1, 2, false] }],
-          ['bold', 'italic', 'underline','strike', 'blockquote'],
-          [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-          ['link', 'image'],
-          ['clean']
-        ],
-      },
-     
-      formats: [
-        'header',
-        'bold', 'italic', 'underline', 'strike', 'blockquote',
-        'list', 'bullet', 'indent',
-        'link', 'image'
-      ],
+      showInputPass: 'none',
     }
-    this.handleChangeContent = this.handleChangeContent.bind(this)
-  }
-  handleChangeContent (html) {
-    let news = {...this.state.news};
-    news.content = html;
-  	this.setState({ news: news });
   }
   componentDidMount() {
     this.props.onFetchNews();
@@ -60,13 +39,17 @@ class News extends Component {
     const news = {...this.props.news};
     news.id = '';
     news.displayImg = true;
+    news.publishedDate = moment();
     this.setState({
       showModal: true,
       news: news
     });
   }
   closeModal = () => {
-    this.setState({showModal: false})
+    this.setState({
+      showModal: false,
+      showInputPass: 'none',
+    })
   }
   handleChangeImage = (event) => {
     const news = {...this.state.news};
@@ -83,6 +66,7 @@ class News extends Component {
   }
   addNewsHandle = async () => {
     const news_temp = {...this.state.news}
+    // console.log(this.state.news)
     Object.keys(news_temp).map(function(key, index) {
       if (news_temp[key]._d) {
         news_temp[key] = news_temp[key]._d.toISOString().slice(0,10);
@@ -121,9 +105,11 @@ class News extends Component {
     news.status = dataModal.status;
     news.photo = dataModal.image;
     news.publishedDate = momentObj;
+    let idDelete = dataModal.id;
     this.setState({
       showModal: true,
-      news: news
+      news: news,
+      idNewsDelete: idDelete,
     });
   }
   updateNewsHandle = async () => {
@@ -162,9 +148,25 @@ class News extends Component {
         position: toast.POSITION.TOP_RIGHT
       });
       this.props.onFetchNews();
+      this.setState({showInputPass: 'none'})
     } catch (err) {
       console.log(err)
     }
+    this.setState({
+      showModal: false,
+      news: {
+        id: '',
+        name: '',
+        content: '',
+        url: '',
+        photo: '',
+        status: '',
+        displayImg: true,
+        publishedDate: moment(),
+        passDelete: '',
+        disableOk: true,
+      }
+    })
   }
   handleChangePublishedDate = (date) => {
     const news = {...this.state.news};
@@ -173,10 +175,14 @@ class News extends Component {
       news: news
     });
   }
+  showTextPasswordDelete = () => {
+    this.setState({
+      showInputPass: '',
+    })
+  }
   render() {
       return (
         <div className="animated fadeIn">
-        {console.log(this.state.news)}
           <Modals showModal={this.state.showModal}
             closeModal={this.closeModal}
             changeImage={this.handleChangeImage.bind()}
@@ -187,14 +193,13 @@ class News extends Component {
             onSubmitEdit={this.updateNewsHandle}
             displayImg={this.state.displayImg}
             onChangePublishedDate = {this.handleChangePublishedDate.bind()}
-            // valueContent={this.state.text}
-            onChangeContent={this.handleChangeContent}
-            modules={this.state.modules}
-            formats={this.state.formats} />
-
-          <ModalDelete showModalDelete={this.state.showModalDelete}
-            closeModalDelete={this.closeModalDelete}
+            showInputPass={this.state.showInputPass}
+            showTextDelete={this.showTextPasswordDelete}
             deleteSubmit={this.deleteNewsHandle} />
+
+          {/* <ModalDelete showModalDelete={this.state.showModalDelete}
+            closeModalDelete={this.closeModalDelete}
+            deleteSubmit={this.deleteNewsHandle} /> */}
 
           <div className="card">
             <div className="card-header">
@@ -210,14 +215,13 @@ class News extends Component {
                   <th className="publisd_date">Publish date</th>
                   <th>Status</th>
                   <th>Title</th>
-                  <th>Content</th>
                   <th>Url</th>
                   <th>Create by</th>
                   <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                  {this.props.news.map(item => {
+                  {this.props.news1.map(item => {
                     return (
                       <tr key={item.id}>
                         <td>{item.created_at.date.slice(0,10)}</td>
@@ -226,17 +230,15 @@ class News extends Component {
                           <Badge className="text-capitalize" color={item.status === "publish" ? "success" : item.status === "completed" ? "secondary" : "danger"}>{item.status}</Badge>
                         </td>
                         <td>{item.name}</td>
-                        <td dangerouslySetInnerHTML={{__html: item.content}} />
-                        {/* <td>{item.content}</td> */}
                         <td onClick={() => window.open(item.url)}><a style={{color:'#1985ac'}} >{item.url.slice(44)}</a></td>
                         <td>{item.userName}</td>
                         <td align="center" className="edit_delete">
                           <span>
                             <i className="fa fa-edit fa-lg mt-4 icon_edit_del" onClick={(e) => this.showModalEditNews(item)} ></i>
                           </span>
-                          <span>
+                          {/* <span>
                             <i className="fa fa-trash-o fa-lg mt-4 icon_edit_del" onClick={(e) => this.showModalDeleteNews(item)} ></i>
-                          </span>
+                          </span> */}
                         </td>
                       </tr>
                     )
@@ -252,7 +254,7 @@ class News extends Component {
 
 const mapStateToProps = state => {
   return {
-    news: state.newState.news
+    news1: state.newState.news
   };
 };
 

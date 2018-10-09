@@ -8,7 +8,7 @@ const initalState = {
   registerData: null
 };
 
-const login = (state, action) => updatedObject(state, { token: action.token, userData: action.userData, expiresIn: action.expiresIn });
+const login = (state, action) => updatedObject(state, { token: action.token, userData: action.userData, expiresIn: action.expiresIn, roleName: action.roleName, });
 
 const logout = (state, action) => updatedObject(state, { token: false, userData: null });
 

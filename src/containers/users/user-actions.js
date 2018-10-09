@@ -46,7 +46,6 @@ const updateUserSuccess = (userUpdate) => {
 }
 
 export const updateUser = (userUpdate) => {
-  // console.log(userUpdate);
   return async dispatch => {
     try {
       const { data } = await axios.post('admin/update', userUpdate)

@@ -28,6 +28,7 @@ const updateStatusSuccess = (statusUpdate) => {
 }
 
 export const updateStatus = (statusUpdate) => {
+  console.log(statusUpdate)
   let id = statusUpdate.id;
   return async dispatch => {
     try {

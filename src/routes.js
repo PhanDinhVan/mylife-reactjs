@@ -48,7 +48,7 @@ const Roles = Loadable({
 })
 
 const Staffs = Loadable({
-  loader: () => import('./containers/staffs/staffs'),
+  loader: () => import('./containers/employees/staffs'),
   loading: Loading,
 })
 
@@ -67,7 +67,6 @@ const ReviewPermissions = Loadable({
   loading: Loading,
 })
 
-
 const routes = [
   // { path: '/', exact: true, name: 'Users', component: Users },
   { path: '/restaurants', exact: true, name: 'Restaurants', component: Restaurants },
@@ -78,7 +77,7 @@ const routes = [
   { path: '/menus_sushi_yen', exact: true, name: 'MenuSushiYen', component: MenuSushiYen },
   { path: '/news', exact: true, name: 'News', component: News },
   { path: '/roles', exact: true, name: 'Roles', component: Roles },
-  { path: '/staffs', exact: true, name: 'Staffs', component: Staffs },
+  { path: '/employees', exact: true, name: 'Staffs', component: Staffs },
   { path: '/booking_managers', exact: true, name: 'BookingPermissions', component: BookingPermissions },
   { path: '/reviews', exact: true, name: 'Reviews', component: Reviews },
   { path: '/review_bmanager', exact: true, name: 'ReviewPermissions', component: ReviewPermissions },

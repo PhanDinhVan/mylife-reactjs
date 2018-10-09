@@ -15,12 +15,12 @@ const ModalStaff = (props) => {
   let btn_submit = '';
   let click_submit = '';
   if(props.objStaff.id) {
-    title = "Edit Staff";
+    title = "Edit Employee";
     read_only = true;
     btn_submit = "Save";
     click_submit = props.onSubmitEdit;
   } else {
-    title = "Add Staff";
+    title = "Add Employee";
     read_only = false;
     btn_submit = "Add";
     click_submit = props.onSubmitAdd;

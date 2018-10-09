@@ -9,12 +9,17 @@ export default {
           name: 'Users',
           url: '/users',
           icon: 'icon-people',
+        },
+        {
+          name: 'Employees',
+          url: '/employees',
+          icon: 'fa fa-drivers-license-o',
         }, 
         {
           name: 'Bookings',
           url: '/bookings',
           icon: 'cui-clipboard',
-        }, 
+        },
         {
           name: 'Reviews',
           url: '/reviews',
@@ -77,11 +82,6 @@ export default {
           name: 'Roles',
           url: '/roles',
           icon: 'fa fa-id-badge',
-        },
-        {
-          name: 'Staffs',
-          url: '/staffs',
-          icon: 'fa fa-drivers-license-o',
         },
       ],
     },

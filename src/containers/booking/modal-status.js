@@ -108,6 +108,16 @@ const ModalStatus = (props) => {
                   </FormGroup>
                 </Col>
               </FormGroup>
+              <Row>
+                <Col xs="12">
+                  <FormGroup>
+                    <Label className="statusBooking" htmlFor="cvv">Comment: </Label>
+                    <Input type="textarea" name="comments" id="comments" rows="3"
+                        placeholder="Content..." onChange={props.onChangeStatus}
+                        defaultValue={props.booking.comments} />
+                  </FormGroup>
+                </Col>
+              </Row>
               <FormGroup row style={{display: props.booking.status==="suggest" ? '' : 'none'}}>
                 <Col md="3">
                   <Label className="statusBooking" >Time: </Label>

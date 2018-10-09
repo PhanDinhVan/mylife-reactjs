@@ -26,9 +26,11 @@ class App extends Component {
     }
   }
   render() {
+    // console.log(this.props.token)
+    // localStorage.setItem('tokenVan', this.props.token);
     let redirectRouter = null;
-    if(this.props.token === false) {
-      redirectRouter = <Redirect to='/login'/>
+    if (this.props.token === false) {
+      redirectRouter = <Redirect to='/login' />
     }
     let routers = (
       <Switch>
@@ -40,7 +42,7 @@ class App extends Component {
         {redirectRouter}
       </Switch>
     );
-    if(this.props.isAuthenticated) {
+    if (this.props.isAuthenticated) {
       routers = (
         <Switch>
           <Route exact path="/logout" name="Login Out" component={Logout} />

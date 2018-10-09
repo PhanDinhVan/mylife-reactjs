@@ -31,9 +31,8 @@ export const addNew = (newsAdd) => {
   return async dispatch => {
     try {
       const fd = new FormData();
-      fd.append('photo', newsAdd.photo);
+      fd.append('image', newsAdd.photo);
       fd.append('name', newsAdd.name);
-      fd.append('content', newsAdd.content);
       fd.append('status', newsAdd.status);
       fd.append('url', newsAdd.url);
       fd.append('publishDate', newsAdd.publishedDate);
@@ -42,6 +41,7 @@ export const addNew = (newsAdd) => {
       dispatch(addNewSuccess(data));
       return Promise.resolve();
     } catch (err) {
+      console.log(err)
       return Promise.reject(err);
     }
   }
@@ -66,7 +66,6 @@ export const updateNew = (newsUpdate) => {
       fd.append('status', newsUpdate.status);
       fd.append('url', newsUpdate.url);
       fd.append('publishDate', publist_date);
-
       const { data } = await axios.post('update', fd)
       dispatch(updateNewSuccess(data));
       return Promise.resolve();
@@ -85,7 +84,7 @@ const deleteNewSuccess = () => {
 export const deleteNew = (idNewsDelete) => {
   return async dispatch => {
     try {
-      const { data } = await axios.delete('delete/'+idNewsDelete);
+      const { data } = await axios.delete('news/delete/'+idNewsDelete);
       dispatch(deleteNewSuccess(data));
       return Promise.resolve();
     } catch (err) {

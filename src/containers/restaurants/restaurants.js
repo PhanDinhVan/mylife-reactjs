@@ -22,6 +22,7 @@ class Restaurants extends Component {
   }
   componentDidMount() {
     this.props.onFetchRestaurant();
+    this.props.onFetchRestaurantBooking();
   }
   showModalAddRestaurant = () => {
     this.setState({showModal: true})
@@ -40,7 +41,6 @@ class Restaurants extends Component {
         <Modal show_Modal={this.state.showModal}
           close_Modal={this.closeModal}
           on_Change={this.handleChange} />
-          {/* {console.log(this.state.restaurant)} */}
         <div className="card">
           <div className="card-header">
             <i className="icon-map"></i> Restaurant List
@@ -114,13 +114,15 @@ class Restaurants extends Component {
 
 const mapStateToProps = state => {
   return {
-    restaurants: state.restaurantState.restaurants
+    restaurants: state.restaurantState.restaurants,
+    restaurantBooking: state.restaurantState.restaurantBooking
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchRestaurant: () => dispatch(actions.fetchRestaurant())
+    onFetchRestaurant: () => dispatch(actions.fetchRestaurant()),
+    onFetchRestaurantBooking: () => dispatch(actions.fetchRestaurantBooking())
   };
 };
 

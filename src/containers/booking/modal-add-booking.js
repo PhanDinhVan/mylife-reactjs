@@ -23,11 +23,11 @@ const ModalStatus = (props) => {
                   <Label className="statusBooking" htmlFor="cvv">Restaurant</Label>
                   <Input type="select" name="shopId" id="select" onChange={props.onChangeInput}>
                     <option value="test">Please select restaurant</option>
-                    {props.listRestaurant.map(restaurant => {
+                    {props.listRestaurant ? props.listRestaurant.map(restaurant => {
                       return (
-                        <option key={restaurant.id} value={restaurant.id}>{restaurant.name} - {restaurant.district} - {restaurant.city}</option>
+                        <option key={restaurant.id} value={restaurant.shopId}>{restaurant.shop.name} - {restaurant.shop.district} - {restaurant.shop.city}</option>
                       )
-                    })}
+                    }): ''}
                   </Input>
                 </FormGroup>
               </Col>
@@ -76,57 +76,66 @@ const ModalStatus = (props) => {
               </Col>
             </Row>
             <FormGroup row>
-                <Col md="3">
-                  <Label className="statusBooking" >Status: </Label>
-                </Col>
-                <Col md="9" className="col-status">
-                  <FormGroup check inline>
-                    <Input className="form-check-input"
-                        type="radio" id="inline-radio1" name="status" 
-                        value="waiting" onChange={props.onChangeStatus} />
-                    <Label className="form-check-label btn-pill btn btn-secondary btn-block" 
-                      check htmlFor="inline-radio1"
-                      style={{backgroundColor: props.bookingAdd.status==="waiting" ? "#ffc107" : "",
-                          borderColor: props.bookingAdd.status==="waiting" ? "#ffc107" : "",
-                          color: props.bookingAdd.status==="waiting" ? "#fff" : "",}}
-                       > Waiting
-                    </Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                    <Input className="form-check-input" 
-                        type="radio" id="inline-radio2" name="status" 
-                        value="confirmed" onChange={props.onChangeStatus} />
-                    <Label className="form-check-label btn-pill btn btn-secondary btn-block" 
-                        check htmlFor="inline-radio2"
-                        style={{backgroundColor: props.bookingAdd.status==="confirmed" ? "#4dbd74" : "",
-                          borderColor: props.bookingAdd.status==="confirmed" ? "#4dbd74" : "",
-                          color: props.bookingAdd.status==="confirmed" ? "#fff" : "",}}
-                        > Confirm</Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                    <Input className="form-check-input"  
-                        type="radio" id="inline-radio3" name="status" 
-                        value="cancelled" onChange={props.onChangeStatus} />
-                    <Label className="form-check-label btn-pill btn btn-secondary btn-block" 
-                        check htmlFor="inline-radio3"
-                        style={{backgroundColor: props.bookingAdd.status==="cancelled" ? "#f86c6b" : "",
-                          borderColor: props.bookingAdd.status==="cancelled" ? "#f86c6b" : "",
-                          color: props.bookingAdd.status==="cancelled" ? "#fff" : "",}}
-                      > Cancel</Label>
-                  </FormGroup>
-                  <FormGroup check inline className="suggest">
-                    <Input className="form-check-input"
-                        type="radio" id="inline-radio4" name="status" 
-                        value="suggest" onChange={props.onChangeStatus} />
-                    <Label className="form-check-label btn-pill btn btn-secondary btn-block" 
-                        check htmlFor="inline-radio4"
-                        style={{backgroundColor: props.bookingAdd.status==="suggest" ? "#1985ac" : "",
-                          borderColor: props.bookingAdd.status==="suggest" ? "#187da0" : "",
-                          color: props.bookingAdd.status==="suggest" ? "#fff" : "",}}
-                      > Suggestion another time</Label>
-                  </FormGroup>
-                </Col>
-              </FormGroup>
+              <Col md="3">
+                <Label className="statusBooking" >Status: </Label>
+              </Col>
+              <Col md="9" className="col-status">
+                <FormGroup check inline>
+                  <Input className="form-check-input"
+                      type="radio" id="inline-radio1" name="status" 
+                      value="waiting" onChange={props.onChangeStatus} />
+                  <Label className="form-check-label btn-pill btn btn-secondary btn-block" 
+                    check htmlFor="inline-radio1"
+                    style={{backgroundColor: props.bookingAdd.status==="waiting" ? "#ffc107" : "",
+                        borderColor: props.bookingAdd.status==="waiting" ? "#ffc107" : "",
+                        color: props.bookingAdd.status==="waiting" ? "#fff" : "",}}
+                      > Waiting
+                  </Label>
+                </FormGroup>
+                <FormGroup check inline>
+                  <Input className="form-check-input" 
+                      type="radio" id="inline-radio2" name="status" 
+                      value="confirmed" onChange={props.onChangeStatus} />
+                  <Label className="form-check-label btn-pill btn btn-secondary btn-block" 
+                      check htmlFor="inline-radio2"
+                      style={{backgroundColor: props.bookingAdd.status==="confirmed" ? "#4dbd74" : "",
+                        borderColor: props.bookingAdd.status==="confirmed" ? "#4dbd74" : "",
+                        color: props.bookingAdd.status==="confirmed" ? "#fff" : "",}}
+                      > Confirm</Label>
+                </FormGroup>
+                <FormGroup check inline>
+                  <Input className="form-check-input"  
+                      type="radio" id="inline-radio3" name="status" 
+                      value="cancelled" onChange={props.onChangeStatus} />
+                  <Label className="form-check-label btn-pill btn btn-secondary btn-block" 
+                      check htmlFor="inline-radio3"
+                      style={{backgroundColor: props.bookingAdd.status==="cancelled" ? "#f86c6b" : "",
+                        borderColor: props.bookingAdd.status==="cancelled" ? "#f86c6b" : "",
+                        color: props.bookingAdd.status==="cancelled" ? "#fff" : "",}}
+                    > Cancel</Label>
+                </FormGroup>
+                <FormGroup check inline className="suggest">
+                  <Input className="form-check-input"
+                      type="radio" id="inline-radio4" name="status" 
+                      value="suggest" onChange={props.onChangeStatus} />
+                  <Label className="form-check-label btn-pill btn btn-secondary btn-block" 
+                      check htmlFor="inline-radio4"
+                      style={{backgroundColor: props.bookingAdd.status==="suggest" ? "#1985ac" : "",
+                        borderColor: props.bookingAdd.status==="suggest" ? "#187da0" : "",
+                        color: props.bookingAdd.status==="suggest" ? "#fff" : "",}}
+                    > Suggestion another time</Label>
+                </FormGroup>
+              </Col>
+            </FormGroup>
+            <Row>
+              <Col xs="12">
+                <FormGroup>
+                  <Label className="statusBooking" htmlFor="cvv">Comment: </Label>
+                  <Input type="textarea" name="comments" id="comments" rows="3"
+                      placeholder="Content..." onChange={props.onChangeInput} />
+                </FormGroup>
+              </Col>
+            </Row>
           </Form>
         </ModalBody>
         <ModalFooter>

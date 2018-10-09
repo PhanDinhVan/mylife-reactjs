@@ -8,7 +8,7 @@ import { promotionReducers } from '../containers/promotion';
 import { menuSuShiReducers } from '../containers/menus_sushi_yen';
 import { newReducers } from '../containers/news';
 import { roleReducers }from '../containers/roles';
-import { staffReducers } from '../containers/staffs';
+import { staffReducers } from '../containers/employees';
 import { bookingManagerReducers } from '../containers/booking_manager';
 import { reviewReducers } from '../containers/reviews';
 import { reviewBManagerReducers } from '../containers/review_booking_manager';

@@ -7,10 +7,6 @@ import { Redirect } from 'react-router-dom';
 import * as actions from './auth-actions';
 import background from '../../assets/img/brand/bg-login.jpg';
 import logo from '../../assets/img/brand/mylifecoffee.png';
-// import BackgroundSlideshow from 'react-background-slideshow';
-
-// import image1 from '../../assets/img/brand/bg-home-1.jpg';
-// import image2 from '../../assets/img/brand/bg-home-3.jpg';
 
 class Login extends Component {
   state = {
@@ -26,7 +22,12 @@ class Login extends Component {
   loginHandler = async () => {
     try {
       await this.props.onLogin(this.state.email, this.state.password);
-      this.props.history.replace('/users');
+      let role = JSON.parse(localStorage.getItem('roleName'));
+      if ( role.roleName === 'booking' ) {
+        this.props.history.replace('/bookings');
+      } else {
+        this.props.history.replace('/users');
+      }
     } catch (err) {
       console.log(err)
     }
@@ -53,7 +54,6 @@ class Login extends Component {
         <div id="contentImg">
           <img src={logo} />
         </div>
-        
         <Container>
           <Row className="justify-content-center">
             <Col className="form-login" lg="4">
@@ -113,8 +113,8 @@ class Login extends Component {
 
 const mapStateToProps = state => {
   return {
-    token: state.authState.token,
-    userData: state.authState.userData
+    userData: state.authState.userData,
+    roleName: state.authState.roleName
   };
 };
 

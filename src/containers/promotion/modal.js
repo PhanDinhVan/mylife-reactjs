@@ -91,7 +91,7 @@ const ModalUser = (props) => {
                 </Col>
                 <Col xs="12" md="6">
                   <Input type="select" name="status" id="status" onChange={props.on_Change}
-                      value={props.obj_Pro.status}>
+                      value={props.obj_Pro.status} className="capitalize">
                       {
                           listStatus.map((status, index) =>
                           <option key={index} value={status}>{status}</option>

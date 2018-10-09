@@ -11,8 +11,8 @@ const fetchStaffSuccess = (staffs) => {
 export const fetchStaff = () => {
   return async dispatch => {
     try {
-      const { data } = await axios.get('admin/staff');
-      dispatch(fetchStaffSuccess(data.staffs));
+      const { data } = await axios.get('admin/employee');
+      dispatch(fetchStaffSuccess(data.employees));
       return Promise.resolve();
     } catch (err) {
       return Promise.reject(err);
@@ -30,7 +30,7 @@ const deleteStaffSuccess = () => {
 export const deleteStaff = (idStaffDelete) => {
   return async dispatch => {
     try {
-      const { data } = await axios.delete('admin/staff/delete/'+idStaffDelete);
+      const { data } = await axios.delete('admin/employee/delete/'+idStaffDelete);
       dispatch(deleteStaffSuccess(data));
       return Promise.resolve();
     } catch (err) {
@@ -49,7 +49,7 @@ const updateStaffSuccess = (staffUpdate) => {
 export const updateStaff = (staffUpdate) => {
   return async dispatch => {
     try {
-      const { data } = await axios.post('/admin/staff/update', staffUpdate)
+      const { data } = await axios.post('/admin/employee/update', staffUpdate)
       dispatch(updateStaffSuccess(data));
       return Promise.resolve();
     } catch (err) {
@@ -66,10 +66,9 @@ const addStaffSuccess = (staffAdd) => {
 }
 
 export const addStaff = (staffAdd) => {
-  console.log(staffAdd)
   return async dispatch => {
     try {
-      const { data } = await axios.post('admin/staff/create', staffAdd)
+      const { data } = await axios.post('admin/employee/create', staffAdd)
       dispatch(addStaffSuccess(data));
       return Promise.resolve();
     } catch (err) {

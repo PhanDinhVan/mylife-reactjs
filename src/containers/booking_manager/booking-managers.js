@@ -19,9 +19,13 @@ class BookingManagers extends Component {
           id: '',
           userId: '',
           restaurants: [],
+          passDelete: '',
+          disableOk: true,
         },
         multiSelect: [],
         loading: false,
+        idDelete: '',
+        showInputPass: 'none',
       }
     }
     componentDidMount() {
@@ -54,10 +58,13 @@ class BookingManagers extends Component {
       var userbooking = this.state.userBooking;
       userbooking.restaurants = [];
       userbooking.userId = '';
+      userbooking.passDelete = '';
+      userbooking.disableOk = true;
       this.setState({
         showModal: false,
         multiSelect: listMultiSelect,
-        userBooking: userbooking
+        userBooking: userbooking,
+        showInputPass: 'none',
       })
     }
     handleChange = (event) => {
@@ -74,6 +81,7 @@ class BookingManagers extends Component {
     handleAddBookingManager = async () => {
       var listIdRestaurant = new Array();
       let listMultiSelect = this.state.multiSelect;
+      console.log(listMultiSelect)
       listMultiSelect.forEach(function(element) {
         if (element.value) {
           listIdRestaurant.push(element.id)
@@ -111,12 +119,11 @@ class BookingManagers extends Component {
     }
 
     showModalEdit = (dataModal) => {
-      console.log(dataModal)
       const userbooking = {...this.state.userBooking};
       userbooking.id = dataModal.id;
-      userbooking.userId = dataModal.userId;
+      userbooking.userId = dataModal.id;
       userbooking.restaurants.push(dataModal.shopId);
-
+      let idDelete = dataModal.id;
       // get list shop when edit
       var listShopId = dataModal.shop_user;
       var listMultiSelect = this.state.multiSelect;
@@ -132,7 +139,8 @@ class BookingManagers extends Component {
       this.setState({
         showModal: true,
         userBooking: userbooking,
-        multiSelect: listMultiSelect
+        multiSelect: listMultiSelect,
+        idDelete: idDelete,
       })
     }
     handleUpdateBookingManager = async () => {
@@ -150,16 +158,43 @@ class BookingManagers extends Component {
       this.setState({
         showModal: false
       })
-      // console.log(userBooking)
-      // try {
-      //   await this.props.onUpdateBookingManager(userBooking);
-      //   toast("Update success !", {
-      //     position: toast.POSITION.TOP_RIGHT
-      //   });
-      //   this.props.onFetchBookingManager();
-      // } catch (err) {
-      //   console.log(err)
-      // }
+      console.log(userBooking)
+      try {
+        await this.props.onUpdateBookingManager(userBooking);
+        toast("Update success !", {
+          position: toast.POSITION.TOP_RIGHT
+        });
+        this.props.onFetchBookingManager();
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    showTextPasswordDelete = () => {
+      this.setState({
+        showInputPass: '',
+      })
+    }
+    deleteBookingManagerHandle = async () => {
+      try {
+        await this.props.onDeleteBookingManager(this.state.idDelete);
+        toast("Delete success !", {
+          position: toast.POSITION.TOP_RIGHT
+        });
+        this.props.onFetchBookingManager();
+        this.setState({showInputPass: 'none'})
+      } catch (err) {
+        console.log(err)
+      }
+      this.setState({
+        showModal: false,
+        userBooking: {
+          id: '',
+          userId: '',
+          restaurants: [],
+          passDelete: '',
+          disableOk: true,
+        }
+      })
     }
     
     render() {
@@ -182,7 +217,10 @@ class BookingManagers extends Component {
               onSubmitAdd={this.handleAddBookingManager}
               onSubmitEdit={this.handleUpdateBookingManager}
               objUserBooking={this.state.userBooking}
-              load={this.state.loading} />
+              load={this.state.loading}
+              showInputPass={this.state.showInputPass}
+              showTextDelete={this.showTextPasswordDelete}
+              deleteSubmit={this.deleteBookingManagerHandle} />
             <div className="card">
               <div className="card-header">
                 <i className="icon-map"></i> Booking Permissions List
@@ -239,6 +277,8 @@ const mapDispatchToProps = dispatch => {
     onFetchUserBooking:() => dispatch(actions.fetchUserBooking()),
     onFetchRestaurant: () => dispatch(actionRestaurant.fetchRestaurant()),
     onAddBookingManager: (userBooking) => dispatch(actions.addBookingManager(userBooking)),
+    onUpdateBookingManager: (updateBookingM) => dispatch(actions.updateBookingManager(updateBookingM)),
+    onDeleteBookingManager: (deleteBookingM) => dispatch(actions.deleteBookingManager(deleteBookingM)),
   };
 };
 

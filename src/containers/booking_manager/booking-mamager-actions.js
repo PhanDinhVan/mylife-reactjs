@@ -52,6 +52,7 @@ const addBookingManagerSuccess = (userBooking) => {
     return async dispatch => {
       try {
         const { data } = await axios.post('booking_manager', userBooking);
+        console.log("success"+data)
         dispatch(addBookingManagerSuccess(data));
         return Promise.resolve();
       } catch (err) {
@@ -59,4 +60,45 @@ const addBookingManagerSuccess = (userBooking) => {
       }
     }
   }
+
+  const updateBookingManagerSuccess = (updateBookingM) => {
+    return {
+      type: actionTypes.UPDATE_BOOKING_MANAGER,
+      updateBookingM: updateBookingM
+    }
+  }
+  
+  export const updateBookingManager = (updateBookingM) => {
+    let id = updateBookingM.userId;
+    return async dispatch => {
+      try {
+        const { data } = await axios.patch('booking_manager/'+id, updateBookingM);
+        console.log("success"+data)
+        dispatch(updateBookingManagerSuccess(data));
+        return Promise.resolve();
+      } catch (err) {
+        return Promise.reject(err);
+      }
+    }
+  }
+
+  const deleteBookingManagerSuccess = () => {
+    return {
+      type: actionTypes.DELETE_BOOKING_MANAGER
+    }
+  }
+  
+  export const deleteBookingManager = (idDelete) => {
+    return async dispatch => {
+      try {
+        const { data } = await axios.delete('booking_manager/delete/'+idDelete);
+        dispatch(deleteBookingManagerSuccess(data));
+        return Promise.resolve();
+      } catch (err) {
+        return Promise.reject(err);
+      }
+    }
+  }
+  
+  
 
